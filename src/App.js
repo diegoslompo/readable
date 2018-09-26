@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import * as Icon from 'react-icons/md'
+import * as Icon from 'react-icons/md'
 import logo from './logo.svg';
 import './App.css';
 import './flex.css';
@@ -43,7 +43,10 @@ class App extends Component {
             <div className="row">
               <div className="col-xs-4">
                 <a href="" className="header__logo">
-                  <img src={logo} className="App-logo" alt="logo" />
+                  <Icon.MdImportContacts />
+                  <div className="header--title">ReadAble</div>
+                
+                  {/* <img src={logo} className="App-logo" alt="logo" /> */}
                 </a>
               </div>
               <div className="col-xs-8 header__right">
@@ -69,23 +72,24 @@ class App extends Component {
               <div className="container">
                 <div className="post-card__item">
                   <div className="post-card__info">
-                    <div className="post-card__avatar"><img src="" ></img></div>
+                    {/* <div className="post-card__avatar"><img src="" ></img></div> */}
                     <div className="post-card__title"> Lorem Ipsum </div>
                     <div className="post-card__write">
                       <div className="post-card__date"> 2 days setember, by diegoslompo in <b>category</b> </div>
-                      <div className="post-card__author"> Author </div>
+                      {/* <div className="post-card__author"> Author </div> */}
                     </div>
-                    <div className="post-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                    <div className="post-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
                   </div>
                   <div className="post-card__utils">
-                    <div className="post-card__util-item post-card--upvote">upvote Icon</div>
-                    <div className="post-card__util-item post-card--downvote">downvote  Icon</div>
-                    <div className="post-card__util-item">Star Icon</div>
-                    <div className="post-card__util-item">Comments Icon</div>
+                    <div className="post-card__util-item"><Icon.MdDeleteSweep /></div>
+                    <div className="post-card__util-item"><Icon.MdEdit /></div>
+                    <div className="post-card__util-item"><Icon.MdStar /></div>
+                    <div className="post-card__util-item"><Icon.MdModeComment /></div>
                   </div>
                   <div className="post-card__actions">
-                    <div className="post-card__action-delete">delete icon</div>
-                    <div className="post-card__action-edit">edit icon</div>
+                    <div className="post-card__actions-item post-card--upvote"> <Icon.MdThumbUp /></div>
+                    <div className="post-card__actions-item post-card--downvote"><Icon.MdThumbDown /></div>
+
                   </div>
                 </div>
               </div>
