@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // import * as Icon from 'react-icons/md'
 import logo from './logo.svg';
-import './App.scss';
+import './App.css';
+import './flex.css';
 
 class App extends Component {
   render() {
@@ -38,44 +39,53 @@ class App extends Component {
 
         <header className="header">
           <div className="container">
-            <a href="" className="header__logo">
-              <img src={logo} className="App-logo" alt="logo" />
-            </a>
-            <ul className="header__categories">
-              <li className="header__category">category 1</li>
-              <li className="header__category">category 2</li>
-              <li className="header__category">category 3</li>
-            </ul>
-            <select className="header__filter">
-              <option>Dec Date</option>
-              <option>Asc Date</option>
-              <option>More Score</option>
-              <option>Minor Score</option>
-            </select>
+            <div className="row">
+              <div className="col-xs-4">
+                <a href="" className="header__logo">
+                  <img src={logo} className="App-logo" alt="logo" />
+                </a>
+              </div>
+              <div className="col-xs-8 header__right">
+                <ul className="header__categories">
+                  <li className="header__category">category 1</li>
+                  <li className="header__category">category 2</li>
+                  <li className="header__category">category 3</li>
+                </ul>
+                <select className="header__filter">
+                  <option>Dec Date</option>
+                  <option>Asc Date</option>
+                  <option>More Score</option>
+                  <option>Minor Score</option>
+                </select>
+              </div>
+
+            </div>
           </div>
         </header>
         <main>
           <section>
             <div className="post-card">
               <div className="container">
-                <div className="post-card__info">
-                  <div className="post-card__avatar"><img src="" ></img></div>
-                  <div className="post-card__title"> Lorem Ipsum </div>
-                  <div className="post-card__write">
-                    <div className="post-card__date"> 2 days setember, by diegoslompo in <b>category</b> </div>
-                    <div className="post-card__author"> Author </div>
+                <div className="post-card__item">
+                  <div className="post-card__info">
+                    <div className="post-card__avatar"><img src="" ></img></div>
+                    <div className="post-card__title"> Lorem Ipsum </div>
+                    <div className="post-card__write">
+                      <div className="post-card__date"> 2 days setember, by diegoslompo in <b>category</b> </div>
+                      <div className="post-card__author"> Author </div>
+                    </div>
+                    <div className="post-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                   </div>
-                  <div className="post-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                </div>
-                <div className="post-card__utils">
-                  <div className="post-card__util-item post-card--upvote">upvote Icon</div>
-                  <div className="post-card__util-item post-card--downvote">downvote  Icon</div>
-                  <div className="post-card__util-item">Star Icon</div>
-                  <div className="post-card__util-item">Comments Icon</div>
-                </div>
-                <div className="post-card__actions">
-                  <div className="post-card__action-delete">delete icon</div>
-                  <div className="post-card__action-edit">edit icon</div>
+                  <div className="post-card__utils">
+                    <div className="post-card__util-item post-card--upvote">upvote Icon</div>
+                    <div className="post-card__util-item post-card--downvote">downvote  Icon</div>
+                    <div className="post-card__util-item">Star Icon</div>
+                    <div className="post-card__util-item">Comments Icon</div>
+                  </div>
+                  <div className="post-card__actions">
+                    <div className="post-card__action-delete">delete icon</div>
+                    <div className="post-card__action-edit">edit icon</div>
+                  </div>
                 </div>
               </div>
             </div>
