@@ -10,34 +10,6 @@ class App extends Component {
     return (
       <div className="App">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet"></link>
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header> */}
-
-        {/* <Icon.MdAcUnit />
-        <Icon.MdControlPoint />
-
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-
-        <p>inspiration</p>
-        <ul>
-          <li>https://dribbble.com/shots/3043066-ePayment-app</li>
-          <li>https://dribbble.com/shots/4167571-Data-interface</li>
-          <li>https://dribbble.com/shots/3512918-dashboard-UI</li>
-          <li>https://dribbble.com/shots/4829514-Purple-day</li>
-          <li>https://dribbble.com/shots/4882318-Twitter-dashboard-re-design</li>
-          <li>https://dribbble.com/shots/2091522-Materials-Sharing-Card</li>
-          <li>categorie > https://dribbble.com/shots/4460793-10C-Books-Animation</li>
-          <li>https://medium.muz.li/retro-interface-reading-app-nike-tinder-and-more-weekly-interutils-roundup-b5c7ac974991</li>
-        </ul> */}
-
-
-
-
-
         <header className="header">
           <div className="container">
             <div className="row">
@@ -55,6 +27,7 @@ class App extends Component {
                   <li className="header__category">category 2</li>
                   <li className="header__category">category 3</li>
                 </ul>
+                <div className="header__grid"><Icon.MdApps /></div>
                 <select className="header__filter">
                   <option>Dec Date</option>
                   <option>Asc Date</option>
@@ -72,24 +45,27 @@ class App extends Component {
               <div className="container">
                 <div className="post-card__item">
                   <div className="post-card__info">
-                    {/* <div className="post-card__avatar"><img src="" ></img></div> */}
-                    <div className="post-card__title"> Lorem Ipsum </div>
-                    <div className="post-card__write">
-                      <div className="post-card__date"> 2 days setember, by diegoslompo in <b>category</b> </div>
-                      {/* <div className="post-card__author"> Author </div> */}
+                    <div className="post-card__top">
+                      <div className="post-card__avatar"><Icon.MdLocalLibrary /></div>
+                      <div className="post-card__write">
+                        <div className="post-card__title"> Lorem Ipsum </div>
+                        <div className="post-card__date"> 2 days setember, by diegoslompo in <b>category</b> </div>
+                      </div>
                     </div>
                     <div className="post-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
                   </div>
                   <div className="post-card__utils">
-                    <div className="post-card__util-item"><Icon.MdDeleteSweep /></div>
                     <div className="post-card__util-item"><Icon.MdEdit /></div>
-                    <div className="post-card__util-item"><Icon.MdStar /></div>
-                    <div className="post-card__util-item"><Icon.MdModeComment /></div>
+                    <div className="post-card__util-item"><Icon.MdDeleteSweep /></div>
+                    <div className="post-card__util-item">
+                      <Icon.MdModeComment />
+                      <div className="post-card__util-comments">+3</div>
+                    </div>
                   </div>
                   <div className="post-card__actions">
                     <div className="post-card__actions-item post-card--upvote"> <Icon.MdThumbUp /></div>
                     <div className="post-card__actions-item post-card--downvote"><Icon.MdThumbDown /></div>
-
+                    <div className="post-card__score">+2</div>
                   </div>
                 </div>
               </div>
@@ -99,6 +75,7 @@ class App extends Component {
             <div className="edit-card">
               <div className="container">
                 <div className="edit-card__wrapper">
+                  <legend className="edit-card__title">Create your post</legend>
                   <form>
                     <input type="text" className="edit-card__input" placeholder="Title"/>
                     <input type="text" className="edit-card__input" placeholder="Your Name"/>
