@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 // import { formatTweet, formatDate } from '../utils/helpers'
 // import { handleToggleTweet } from '../actions/tweets'
 
 class Post extends Component {
-//   handleLike = (e) => {
-//     e.preventDefault()
+  // handleLike = (e) => {
+  //   e.preventDefault()
 
-//     // todo: Handle Like Tweet
-//     const { dispatch, tweet, authedUser } = this.props
-//      dispatch(handleToggleTweet({
-//       id: tweet.id,
-//       hasLiked: tweet.hasLiked,
-//       authedUser
-//     }))
-//   }
-//   toParent = (e, id) => {
-//     e.preventDefault()
-//     // todo: Redirect to parent Tweet.
-//   }
+  //   // todo: Handle Like Tweet
+  //   const { dispatch, tweet, authedUser } = this.props
+  //    dispatch(handleToggleTweet({
+  //     id: tweet.id,
+  //     hasLiked: tweet.hasLiked,
+  //     authedUser
+  //   }))
+  // }
+  toParent = (e, id) => {
+    e.preventDefault()
+    // todo: Redirect to parent Tweet.
+  }
   render() {
     const { post } = this.props
 
@@ -65,17 +65,17 @@ class Post extends Component {
   }
 }
 
-// function mapStateToProps ({posts}, { id }) {
-//   const post = posts[id]
-//   const parentPost = tweet ? posts[post.replyingTo] : null
+function mapStateToProps ({posts}, { id }) {
+  const post = posts[id]
+  const parentPost = post ? posts[post.replyingTo] : null
 
-//   return {
-//     post: post
-//       ? formatPost(post, users[post.author], parentPost)
-//       : null
-//   }
-// }
+  return {
+    post: post
+      ? parentPost
+      : null
+  }
+}
 
-export default Post
+// export default Post
 
-// export default connect(mapStateToProps)(Post)
+export default connect(mapStateToProps)(Post)

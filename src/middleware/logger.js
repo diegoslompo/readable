@@ -1,3 +1,5 @@
+console.log("esta no console")
+
 const logger = (store) => (next) => (action) => {
     console.group(action.type)
       console.log('The action: ', action)
@@ -6,5 +8,5 @@ const logger = (store) => (next) => (action) => {
     console.groupEnd()
     return returnValue
   }
-  
+
   export default logger

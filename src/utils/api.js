@@ -9,6 +9,14 @@ const headers = {
   'Authorization': token
 }
 
+export function getInitialData () {
+  return Promise.all([
+    getAllPosts()
+  ]).then(([posts]) => ({
+    posts
+  }))
+}
+
 export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
