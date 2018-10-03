@@ -15,21 +15,22 @@ class Post extends Component {
   //     authedUser
   //   }))
   // }
-  toParent = (e, id) => {
-    e.preventDefault()
-    // todo: Redirect to parent Tweet.
-  }
+  // toParent = (e, id) => {
+  //   e.preventDefault()
+  //   // todo: Redirect to parent Tweet.
+  // }
   render() {
     const { post } = this.props
 
-    if (post === null) {
-      return <p>This Tweet doesn't existd</p>
-    }
+    // if (post === null) {
+    //   return <p>This Tweet doesn't existd</p>
+    // }
 
     const {
       title, body, timestamp, author, category, voteScore, deleted, commentCount
     } = post
 
+    console.log(this.props)
     return (
       <div className='tweet'>
         <div className='tweet-info'>
@@ -42,23 +43,7 @@ class Post extends Component {
             <p>deleted: {deleted}</p>
             <p>commentCount: {commentCount}</p>
             <p>timestamp: {timestamp}</p>
-            {/* {/* <div>{formatDate(timestamp)}</div> */} */}
-            {/* {parent && (
-              <button className='replying-to' onClick={(e) => this.toParent(e, parent.id)}>
-                Replying to @{parent.author}
-              </button>
-            )} */}
           </div>
-          {/* <div className='tweet-icons'>
-            <TiArrowBackOutline className='tweet-icon' />
-            <span>{replies !== 0 && replies}</span>
-            <button className='heart-button' onClick={this.handleLike}>
-              {hasLiked === true
-                ? <TiHeartFullOutline color='#e0245e' className='tweet-icon' />
-                : <TiHeartOutline className='tweet-icon'/>}
-            </button>
-            <span>{likes !== 0 && likes}</span>
-          </div> */}
         </div>
       </div>
     )
@@ -67,12 +52,12 @@ class Post extends Component {
 
 function mapStateToProps ({posts}, { id }) {
   const post = posts[id]
-  const parentPost = post ? posts[post.replyingTo] : null
+  // const parentPost = post ? posts[post.replyingTo] : null
 
   return {
     post: post
-      ? parentPost
-      : null
+      // ? parentPost
+      // : null
   }
 }
 
