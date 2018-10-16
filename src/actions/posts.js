@@ -14,13 +14,63 @@ export function receivePosts (posts) {
 }
 
 //posts
+
 export const upVotePost = (id) => dispatch => (
   voteOnPost(id, "upVote")
-    .then(post => dispatch({
+    .then(() => {
+      dispatch({
         type: POST_VOTED,
-        post
-    }))
-);
+        id
+      })
+    })
+)
+
+// export const upVotePost = (postId, option) => dispatch => (
+//   voteOnPost(postId, option)
+//     .then((post) => {
+//       dispatch({
+//         type: POST_VOTED,
+//         post
+//       })
+//     })
+// );
+
+
+// export const voteOnPost = (postId, isUpVote) => dispatch => {
+//   dispatch(loadingData(true))
+//   return API.voteOnPost(postId, isUpVote).then((post) => {
+//     dispatch({type: ACTIONS.POST_VOTED, post})
+//     dispatch(loadingData(false))
+//   })
+// }
+
+
+
+
+// function toggleTweet ({ id, authedUser, hasLiked }) {
+//   return {
+//     type: POST_VOTED,
+//     id,
+//     authedUser,
+//     hasLiked
+//   }
+// }
+
+// export function handleToggleTweet (info) {
+//   return (dispatch) => {
+//     dispatch(toggleTweet(info))
+
+//     return saveLikeToggle(info)
+//       .catch((e) => {
+//         console.warn('Error in handleToggleTweet: ', e)
+//         dispatch(toggleTweet(info))
+//         alert('The was an error liking the tweet. Try again.')
+//       })
+//   }
+// }
+
+
+
 // export const downVotePost = (id) => dispatch => (
 //   voteOnPost(id, downVote)
 //       .then(post => dispatch({

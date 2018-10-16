@@ -17,17 +17,16 @@ export default function posts (state={}, action) {
     
     case POST_VOTED: {
       // const {id, votes} = action;
-      // const {posts} = action;
+      const {post} = action;
 
       // return state.map((post) => post.id === action.post.id ? action.post : post )
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
-          posts: action.type === true
-            ? state[action.id].type.filter((uid) => uid !== action.id)
-            : 'teste'
-        }
+        // post: {
+        //   ...state.post,
+        //   voteScore: action.voteScore
+        // }
+        [post.id]: post
         // posts: state.posts.filter(post => post.id !== action.post.id ? action.post : post)
         // posts: state.map((post) => post.id === action.post.id ? action.post : post )
       }

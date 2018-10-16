@@ -7,8 +7,19 @@ import { upVotePost } from '../actions/posts'
 
 class Post extends Component {
 
-  handleUpVote = (e) =>  {
-    e.preventDefault()
+  // handleUpVote = (e) =>  {
+  //   e.preventDefault()
+
+  //   const {dispatch, post} = this.props
+
+  //   dispatch(upVotePost({
+  //     id: post.id,
+  //     handleLike: true
+  //     }
+  //   ))
+  // }
+
+  handleUpVote = (id) => {
 
     const {dispatch, post} = this.props
 
@@ -17,6 +28,7 @@ class Post extends Component {
       }
     ))
   }
+
 
   // votePost = (e) => {
   //   e.preventDefault()
@@ -66,7 +78,7 @@ class Post extends Component {
         </div>
         </div>
         <div className="post-card__actions">
-          <button className="post-card__actions-item post-card--upvote" onClick={this.handleUpVote}> <Icon.MdThumbUp /></button>
+          <button className="post-card__actions-item post-card--upvote" id={id} onClick={this.handleUpVote}> <Icon.MdThumbUp /></button>
           <button className="post-card__actions-item post-card--downvote"><Icon.MdThumbDown /></button>
           <div className="post-card__score">{voteScore}</div>
          </div>
