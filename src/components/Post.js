@@ -1,34 +1,47 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as Icon from 'react-icons/md'
-// import { formatTweet, formatDate } from '../utils/helpers'
-// import { handleToggleTweet } from '../actions/tweets'
+import { formatDate } from '../utils/helpers'
+import { upVotePost } from '../actions/posts'
+// import { handleTrigerPost } from '../actions/posts'
 
 class Post extends Component {
-  // handleLike = (e) => {
+
+  handleUpVote = (e) =>  {
+    e.preventDefault()
+
+    const {dispatch, post} = this.props
+
+    dispatch(upVotePost({
+      id: post.id
+      }
+    ))
+  }
+
+  // votePost = (e) => {
   //   e.preventDefault()
 
-  //   // todo: Handle Like Tweet
-  //   const { dispatch, tweet, authedUser } = this.props
-  //    dispatch(handleToggleTweet({
-  //     id: tweet.id,
-  //     hasLiked: tweet.hasLiked,
-  //     authedUser
+  //   // todo: Handle Like
+  //   const { dispatch, post} = this.props
+  //    dispatch(votePost({
+  //     id: post.id,
+  //     hasLiked: post.hasLiked
   //   }))
   // }
   // toParent = (e, id) => {
   //   e.preventDefault()
   //   // todo: Redirect to parent Tweet.
   // }
-  render() {
-    const { post } = this.props
 
-    // if (post === null) {
-    //   return <p>This Tweet doesn't existd</p>
-    // }
+  render() {
+    const { post} = this.props
+
+    if (post === null) {
+      return <p>This Post doesn't exist</p>
+    }
 
     const {
-      title, body, timestamp, author, category, voteScore, deleted, commentCount
+      id, title, body, timestamp, author, category, voteScore, deleted, commentCount
     } = post
 
     console.log(this.props)
@@ -39,7 +52,7 @@ class Post extends Component {
             <div className="post-card__avatar"><Icon.MdLocalLibrary /></div>
             <div className="post-card__write">
               <div className="post-card__title"> {title} </div>
-              <div className="post-card__date"> {timestamp}, by {author} in <b>{category}</b> </div>
+              <div className="post-card__date"> {formatDate(timestamp)}, by {author} in <b>{category}</b> </div>
             </div>
           </div>
           <div className="post-card__description">{body}</div>
@@ -53,8 +66,8 @@ class Post extends Component {
         </div>
         </div>
         <div className="post-card__actions">
-          <div className="post-card__actions-item post-card--upvote"> <Icon.MdThumbUp /></div>
-          <div className="post-card__actions-item post-card--downvote"><Icon.MdThumbDown /></div>
+          <button className="post-card__actions-item post-card--upvote" onClick={this.handleUpVote}> <Icon.MdThumbUp /></button>
+          <button className="post-card__actions-item post-card--downvote"><Icon.MdThumbDown /></button>
           <div className="post-card__score">{voteScore}</div>
          </div>
       </div>

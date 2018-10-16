@@ -17,15 +17,16 @@
 
 import { getInitialData } from '../utils/api'
 import {receivePosts} from '../actions/posts'
-console.log("esta na shared")
+import { showLoading, hideLoading } from 'react-redux-loading'
 
 export function handleInitialData () {
   return(dispatch) => {
+    dispatch(showLoading())
     return getInitialData()
       .then(({posts}) => {
         dispatch(receivePosts(posts))
         // // dispatch(receiveComments(comments))
-        // dispatch(hideLoading())
+        dispatch(hideLoading())
         // dispatch(showLoading())
       })
   }

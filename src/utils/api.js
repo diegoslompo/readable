@@ -11,9 +11,11 @@ const headers = {
 
 export function getInitialData () {
   return Promise.all([
-    getAllPosts()
-  ]).then(([posts]) => ({
-    posts
+    getAllPosts(),
+    getCategories()
+  ]).then(([posts, categories]) => ({
+    posts,
+    categories
   }))
 }
 
@@ -58,11 +60,23 @@ export const deletePost = (postId) =>
   }).then(res => res.json())
   .then(data => data)
 
-export const voteOnPost = (postId, thumbsUp) =>
-  fetch(`${api}/posts/${postId}`, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({'option': thumbsUp? 'upVote' : 'downVote'})
+// export const voteOnPost = (postId, thumbsUp) =>
+//   fetch(`${api}/posts/${postId}`, {
+//     method: 'POST',
+//     headers: headers,
+//     body: JSON.stringify({'option': thumbsUp? 'upVote' : 'downVote'})
+//   }).then(res => res.json())
+
+export const voteOnPost = (id, option) =>
+  fetch(`${api}/posts/${id}`, {
+      method: 'POST',
+      headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          option
+      })
   }).then(res => res.json())
 
 export const addComment = (body, author, parentId) =>
