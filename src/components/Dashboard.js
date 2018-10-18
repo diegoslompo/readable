@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
+import Category from './Category'
 import * as Icon from 'react-icons/md'
 
 class Dashboard extends Component {
@@ -8,13 +9,6 @@ class Dashboard extends Component {
     console.log(this.props)
     return (
       <div>
-        {/* <ul className='dashboard-list'>
-          {this.props.postIds.map((id) => (
-            <li key={id}>
-              <Post id={id}/>
-            </li>
-          ))}
-        </ul> */}
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet"></link>
         <header className="header">
           <div className="container">
@@ -23,15 +17,21 @@ class Dashboard extends Component {
                 <a href="" className="header__logo">
                   <Icon.MdFilterDrama />
                   <div className="header--title">ReadAble</div>
-                
-                  {/* <img src={logo} className="App-logo" alt="logo" /> */}
                 </a>
               </div>
               <div className="col-xs-8 header__right">
                 <ul className="header__categories">
-                  <li className="header__category">category 1</li>
-                  <li className="header__category">category 2</li>
-                  <li className="header__category">category 3</li>
+                  {/* {this.props.categories.map((item) => {
+                    return (
+                      <div key={item.name}>{item.name}</div>
+                    )
+                  } 
+                  )} */}
+                  {this.props.categories.map((item) => (
+                    <li className="header__category" key={item} >
+                      <Category id={item.name}/>
+                    </li>
+                  ))}
                 </ul>
                 <div className="header__grid"><Icon.MdApps /></div>
                 <select className="header__filter">
@@ -66,12 +66,19 @@ class Dashboard extends Component {
 }
 
 
-function mapStateToProps ({ posts }) {
+function mapStateToProps ({ posts, categories}) {
   return {
+    categories: Object.keys(categories),
     postIds: Object.keys(posts)
       .sort((a,b) => posts[b].timestamp - posts[a].timestamp)
   }
 }
+
+// const mapStateToProps = ({ categories }) => {
+//   return {
+//     categories: categories.categories
+//   }
+// }
 
 export default connect(mapStateToProps)(Dashboard)
 
