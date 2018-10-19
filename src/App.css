@@ -8,6 +8,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+button {
+  border: 0;
+}
+
 .container {
   max-width: 1024px;
   margin: 0 auto;
@@ -239,14 +243,14 @@ body {
   font-weight: 900;
   color: #ffffff;
   position: absolute;
-  left: -39px;
   border-radius: 0px 50px 0px 10px;
-  top: -1px;
+  bottom: 22px;
+  left: -39px;
   background: #bababa;
-  height: 22px;
-  width: 23px;
-  line-height: 2.9;
-  padding-left: 4px;
+  height: 26px;
+  width: 22px;
+  line-height: 3.3;
+  padding-left: 8px;
 }
 
 .post-card__top {

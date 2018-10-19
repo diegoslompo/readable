@@ -69,7 +69,7 @@ class Post extends Component {
           <button className="post-card__actions-item post-card--upvote" onClick={this.handleUpVote}> <Icon.MdThumbUp /></button>
           <button className="post-card__actions-item post-card--downvote"><Icon.MdThumbDown /></button>
           <div className="post-card__score">{voteScore}</div>
-         </div>
+        </div>
       </div>
     )
   }

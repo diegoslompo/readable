@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
-import Category from './Category'
+// import Category from './Category'
 import * as Icon from 'react-icons/md'
 
 class Dashboard extends Component {
@@ -21,15 +21,10 @@ class Dashboard extends Component {
               </div>
               <div className="col-xs-8 header__right">
                 <ul className="header__categories">
-                  {/* {this.props.categories.map((item) => {
-                    return (
-                      <div key={item.name}>{item.name}</div>
-                    )
-                  } 
-                  )} */}
                   {this.props.categories.map((item) => (
-                    <li className="header__category" key={item} >
-                      <Category id={item.name}/>
+                    <li className="header__category" key={item.name} >
+                      {item.name}
+                      {/* <Category id={item.name}/> */}
                     </li>
                   ))}
                 </ul>
@@ -41,7 +36,6 @@ class Dashboard extends Component {
                   <option>Minor Score</option>
                 </select>
               </div>
-
             </div>
           </div>
         </header>
@@ -59,6 +53,9 @@ class Dashboard extends Component {
               </div>
             </div>
           </section>
+          <section>
+            {/* <NewPost/> */}
+          </section>
         </main>
       </div>
     )
@@ -68,7 +65,7 @@ class Dashboard extends Component {
 
 function mapStateToProps ({ posts, categories}) {
   return {
-    categories: Object.keys(categories),
+    categories: Object.values(categories),
     postIds: Object.keys(posts)
       .sort((a,b) => posts[b].timestamp - posts[a].timestamp)
   }
