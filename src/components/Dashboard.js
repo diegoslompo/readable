@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
+import NewPost from './NewPost'
 // import Category from './Category'
 import * as Icon from 'react-icons/md'
 
@@ -54,7 +55,7 @@ class Dashboard extends Component {
             </div>
           </section>
           <section>
-            {/* <NewPost/> */}
+            <NewPost/>
           </section>
         </main>
       </div>

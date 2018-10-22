@@ -1,4 +1,4 @@
-import {RECEIVE_POSTS, POST_VOTED} from '../actions/posts'
+import {RECEIVE_POSTS, ADD_POST} from '../actions/posts'
 // import { RECEIVE_TWEETS, TOGGLE_TWEET } from '../actions/tweets'
 
 export default function posts (state={}, action) {
@@ -9,39 +9,20 @@ export default function posts (state={}, action) {
         ...state,
         ...action.posts 
       }
-    // case TRIGER_POST :
-    //   return {
-    //     ...state,
-    //     [action.id]: action
-    //   }
-    
-    case POST_VOTED: {
-      // const {id, votes} = action;
-      // const {posts} = action;
-
-      // return state.map((post) => post.id === action.post.id ? action.post : post )
+    case ADD_POST :
+      const { post } = action
+        // [tweet.replyingTo]: {
+        //   ...state[tweet.replyingTo],
+        //   replies: state[tweet.replyingTo].replies.concat([tweet.id])
+        // }
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
-          posts: action.type === true
-            ? state[action.id].type.filter((uid) => uid !== action.id)
-            : 'teste'
-        }
-        // posts: state.posts.filter(post => post.id !== action.post.id ? action.post : post)
-        // posts: state.map((post) => post.id === action.post.id ? action.post : post )
+        [post.id]: post
       }
-      // ...state,
-      // posts: sortPostsBy(
-      //     state.posts
-      //         .filter(post => post.id !== action.post.id)
-      //         .concat(action.post),
-      //     state.sortBy)
 
-        // posts: action.posts.filter(post => post.id)
-        // posts: state.posts.filter(post => post.id !== action.post.id).concat(action.post)
-      // }
-    }
+      // ...state,
+      // posts: [...state.posts, action.post]
+
     default:
       return state 
   }

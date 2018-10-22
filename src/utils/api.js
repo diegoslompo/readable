@@ -39,12 +39,33 @@ export const getAllPostsInCategory = (category) =>
     .then(res => res.json())
     .then(data => data)
 
-export const addPost = (title, body, author, category) =>
+// export const addPost = (title, body, author, category) =>
+//   fetch(`${api}/posts`, {
+//     method: 'POST',
+//     headers: headers,
+//     body: JSON.stringify({ title, body, author, category, id: randomString(20), timestamp:Date.now()})
+//   }).then(res => res.json())
+
+function generateUID () {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
+
+export const addPost = (newPost) =>
   fetch(`${api}/posts`, {
     method: 'POST',
-    headers: headers,
-    // body: JSON.stringify({ title, body, author, category, id: utils.randomString(20), timestamp:Date.now()})
-  }).then(res => res.json())
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    // body: JSON.stringify({ title, body, author, category, id: generateUID(), timestamp:Date.now()})
+    body: JSON.stringify(newPost)
+  })
+  .then(data => data.json())
+
+  
+// export function randomString(length) {
+//   return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
+// }
 
 export const editPost = (postId, title, body) =>
   fetch(`${api}/posts/${postId}`, {

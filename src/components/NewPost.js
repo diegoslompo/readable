@@ -2,31 +2,75 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddPost } from '../actions/posts'
 
-class NewTweet extends Component {
+class NewPost extends Component {
   state = {
-    text: '',
+    title: '',
+    selectedCategory: '',
+    author: '',
+    body: '',
+    id: '',
   }
-  handleChange = (e) => {
-    const text = e.target.value
 
+  handleChangeTitle = (e) => {
+    const title = e.target.value
     this.setState(() => ({
-      text
+      title
     }))
   }
+  handleChangeAuthor = (e) => {
+    const author = e.target.value
+    this.setState(() => ({
+      author
+    }))
+  }
+  handleChangeBody = (e) => {
+    const body = e.target.value
+    this.setState(() => ({
+      body
+    }))
+  }
+  handleChangeCategory = (e) => {
+    const category = e.target.value
+    this.setState(() => ({
+      category
+    }))
+  }
+
+
   handleSubmit = (e) => {
     e.preventDefault()
 
-    const { text } = this.state
-    const { dispatch, id } = this.props
+    const { body, title, category, author } = this.state
+    const { dispatch, id} = this.props
 
-    dispatch(handleAddTweet(text, id))
+    
+
+    dispatch(handleAddPost(body, title, category, author, id))
 
     this.setState(() => ({
-      text: ''
+      body: '',
+      title: '',
+      category: '',
+      author: '',
     }))
-  }
+
+  //   const newObject = {
+  //     id: randomString(),
+  //     timestamp: Date.now(),
+  //     body,
+  //     title,
+  //     category,
+  //     author
+  //   }
+  
+}
+randomString = (length) => {
+  return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
+}
+
   render() {
-    const { text } = this.state
+    const { categories } = this.props
+    const { body, title, category, author } = this.state
 
     {/* todo: Redirect to / if submitted */}
 
@@ -43,44 +87,42 @@ class NewTweet extends Component {
                 className="edit-card__input"
                 placeholder="Title"
                 value={title}
-                onChange={this.handleChange}
+                onChange={this.handleChangeTitle}
               />
               <input
                 type="text"
                 className="edit-card__input"
                 placeholder="Your Name"
                 value={author}
-                onChange={this.handleChange}
+                onChange={this.handleChangeAuthor}
               />
               <select
                 className="edit-card__select"
-                value={body}
-                onChange={this.handleChange}
-              >
-                <option className="edit-card__option">Category</option>
+                value={category}
+                onChange={this.handleChangeCategory}>
+                {categories && categories.map((category) => (
+                  <option className="edit-card__option" key={category.path}>{category.name}</option>
+                ))}
               </select>
+              {/* <select value={category} onChange={this.handleChangeCategory}>
+                <option> category 1</option>
+                <option> category 2</option>
+              </select> */}
               <textarea
                 className="edit-card__textarea"
                 value={body}
-                onChange={this.handleChange}
+                onChange={this.handleChangeBody}
               > </textarea>
-
-              <button
-                className='btn'
-                type='submit'
-                disabled={text === ''}>
-                  Submit
-              </button>
               <button
                 type="submit"
                 className="edit-card__button edit-card--send"
-                disabled={text === ''}>
+                disabled={body === ''}>
                 Submit
               </button>
               <button
                 type="text"
                 className="edit-card__button edit-card--cancel"
-                disabled={text === ''}>
+                disabled={body === ''}>
                 Submit
               </button>
             </form>
@@ -91,4 +133,10 @@ class NewTweet extends Component {
   }
 }
 
-export default connect()(NewPost)
+function mapStateToProps ({categories}) {
+  return {
+    categories: Object.values(categories)
+  }
+}
+
+export default connect(mapStateToProps)(NewPost)

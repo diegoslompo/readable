@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as Icon from 'react-icons/md'
 import { formatDate } from '../utils/helpers'
-import { upVotePost } from '../actions/posts'
+// import { upVotePost } from '../actions/posts'
 // import { handleTrigerPost } from '../actions/posts'
 
 class Post extends Component {
 
-  handleUpVote = (e) =>  {
-    e.preventDefault()
+  // handleUpVote = (e) =>  {
+  //   e.preventDefault()
 
-    const {dispatch, post} = this.props
+  //   const {dispatch, post} = this.props
 
-    dispatch(upVotePost({
-      id: post.id
-      }
-    ))
-  }
+  //   dispatch(upVotePost({
+  //     id: post.id
+  //     }
+  //   ))
+  // }
 
   // votePost = (e) => {
   //   e.preventDefault()
