@@ -46,9 +46,6 @@ export const getAllPostsInCategory = (category) =>
 //     body: JSON.stringify({ title, body, author, category, id: randomString(20), timestamp:Date.now()})
 //   }).then(res => res.json())
 
-function generateUID () {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-}
 
 export const addPost = (newPost) =>
   fetch(`${api}/posts`, {
@@ -57,7 +54,7 @@ export const addPost = (newPost) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    // body: JSON.stringify({ title, body, author, category, id: generateUID(), timestamp:Date.now()})
+    // body: JSON.stringify({ title, body, author, category, id})
     body: JSON.stringify(newPost)
   })
   .then(data => data.json())

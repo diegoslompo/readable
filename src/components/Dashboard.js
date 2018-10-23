@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
-import NewPost from './NewPost'
+import Modal from 'react-modal'
+import FormPost from './FormPost'
 // import Category from './Category'
 import * as Icon from 'react-icons/md'
 
 class Dashboard extends Component {
+
+  state = {
+    postModalOpen: false
+  }
+
+  openPostModal = () => this.setState(() => ({ postModalOpen: true }))
+  closePostModal = () => this.setState(() => ({ postModalOpen: false }))
+
   render() {
-    console.log(this.props)
+
+    const { postModalOpen } = this.state
+
     return (
       <div>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet"></link>
@@ -55,7 +66,27 @@ class Dashboard extends Component {
             </div>
           </section>
           <section>
-            <NewPost/>
+            <div className="container">
+              <div className="edit-card">
+                <button
+                  className="edit-card__title"
+                  onClick={this.openPostModal}
+                  > Create your post</button>
+              </div>
+              <Modal
+                className='modal'
+                overlayClassName='overlay'
+                isOpen={postModalOpen}
+                contentLabel='Modal'
+              >
+                <button
+                className="edit-card edit-card__close"
+                onClick={this.closePostModal}
+                > <Icon.MdClose /> </button>
+
+                <FormPost/>
+              </Modal>
+            </div>
           </section>
         </main>
       </div>

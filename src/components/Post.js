@@ -2,36 +2,22 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as Icon from 'react-icons/md'
 import { formatDate } from '../utils/helpers'
-// import { upVotePost } from '../actions/posts'
+import { handleDeletePost } from '../actions/posts'
 // import { handleTrigerPost } from '../actions/posts'
 
 class Post extends Component {
 
-  // handleUpVote = (e) =>  {
-  //   e.preventDefault()
+  state = {
+    id: '',
+  }
 
-  //   const {dispatch, post} = this.props
+  handleDelete = (e) => {
+    e.preventDefault()
 
-  //   dispatch(upVotePost({
-  //     id: post.id
-  //     }
-  //   ))
-  // }
-
-  // votePost = (e) => {
-  //   e.preventDefault()
-
-  //   // todo: Handle Like
-  //   const { dispatch, post} = this.props
-  //    dispatch(votePost({
-  //     id: post.id,
-  //     hasLiked: post.hasLiked
-  //   }))
-  // }
-  // toParent = (e, id) => {
-  //   e.preventDefault()
-  //   // todo: Redirect to parent Tweet.
-  // }
+    const { dispatch, post } = this.props
+    
+    dispatch(handleDeletePost(post.id))
+  }
 
   render() {
     const { post} = this.props
@@ -59,7 +45,7 @@ class Post extends Component {
         </div>
         <div className="post-card__utils">
         <div className="post-card__util-item"><Icon.MdEdit /></div>
-        <div className="post-card__util-item"><Icon.MdDeleteSweep /></div>
+        <div className="post-card__util-item" onClick={this.handleDelete} ><Icon.MdDeleteSweep /></div>
         <div className="post-card__util-item">
           <Icon.MdModeComment />
           <div className="post-card__util-comments">({commentCount})</div>

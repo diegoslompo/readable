@@ -1,4 +1,4 @@
-import {RECEIVE_POSTS, ADD_POST} from '../actions/posts'
+import {RECEIVE_POSTS, ADD_POST, DELETE_POST} from '../actions/posts'
 // import { RECEIVE_TWEETS, TOGGLE_TWEET } from '../actions/tweets'
 
 export default function posts (state={}, action) {
@@ -19,6 +19,13 @@ export default function posts (state={}, action) {
         ...state,
         [post.id]: post
       }
+    case DELETE_POST :
+      const { post } = action
+      // return {
+      //   ...state,
+      //   [post.id]: post
+      // }
+      return state.filter(post => post.id !== postId)
 
       // ...state,
       // posts: [...state.posts, action.post]

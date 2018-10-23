@@ -302,10 +302,15 @@ body {
   color: #908d8d;
 }
 
+.edit-card input,
+select,
+textarea {
+  border: 1px solid #b3b3b3;
+}
+
 .edit-card select {
   width: 100%;
   border-radius: 3px;
-  border: 0;
   padding: 12px 15px;
   margin: 5px 0;
   font-size: 14px;
@@ -315,7 +320,6 @@ body {
 .edit-card textarea {
   width: 100%;
   border-radius: 3px;
-  border: 0;
   padding: 12px 15px;
   margin: 5px 0;
   font-size: 14px;
@@ -328,7 +332,8 @@ button.edit-card__button {
   margin-right: 15px;
 }
 
-legend.edit-card__title {
+button.edit-card__title {
+  background: transparent;
   border: 2px dotted #d0d0d0;
   border-radius: 3px;
   padding: 16px 20px;
@@ -342,4 +347,41 @@ button.edit-card--send {
   background-color: #00c295;
   color: #fff;
   font-weight: 600;
+}
+
+.modal {
+  position: absolute;
+  top: 40px;
+  left: 200px;
+  right: 200px;
+  bottom: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: #f1f1f1;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,.24), 0 3px 12px 0 rgba(0,0,0,.12);
+  min-width: 300px;
+}
+
+.modal .edit-card {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0; 
+}
+
+.modal button.edit-card.edit-card__close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 55px;
+  height: 55px;
+  font-size: 45px;
+  padding: 0px 10px;
+  border-radius: 0px 0px 0px 8px;
+  background-color: #ff6262;
+  color: #fff;
 }
