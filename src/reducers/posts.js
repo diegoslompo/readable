@@ -2,6 +2,7 @@ import {RECEIVE_POSTS, ADD_POST, DELETE_POST} from '../actions/posts'
 // import { RECEIVE_TWEETS, TOGGLE_TWEET } from '../actions/tweets'
 
 export default function posts (state={}, action) {
+  const { post } = action
   switch (action.type) {
     case RECEIVE_POSTS:
       return {
@@ -10,25 +11,17 @@ export default function posts (state={}, action) {
         ...action.posts 
       }
     case ADD_POST :
-      const { post } = action
-        // [tweet.replyingTo]: {
-        //   ...state[tweet.replyingTo],
-        //   replies: state[tweet.replyingTo].replies.concat([tweet.id])
-        // }
       return {
         ...state,
         [post.id]: post
       }
     case DELETE_POST :
-      const { post } = action
+      return state.filter(obj => obj.id !== action.id);
       // return {
       //   ...state,
-      //   [post.id]: post
+      //   // [action.id]: post
+      //   // post: [...state.post.filter(item => item.id !== action.id)]
       // }
-      return state.filter(post => post.id !== postId)
-
-      // ...state,
-      // posts: [...state.posts, action.post]
 
     default:
       return state 

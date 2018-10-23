@@ -18,34 +18,40 @@ function newPost (post) {
   } 
 }
 
-function deletePostItem (post) {
-  return {
-    type: DELETE_POST,
-    post,
-  } 
-}
+// function deletePostItem (id) {
+//   return {
+//     type: DELETE_POST,
+//     id,
+//   } 
+// }
+
+// export function handleDeletePost (id) {
+//   return (dispatch) => {
+//     return deletePost({
+//       id
+//     })
+//       .then((id) => dispatch(deletePostItem(id)))
+//   }
+// }
 
 export function handleDeletePost (id) {
   return (dispatch) => {
-    return deletePost({
-      id
-    })
-      .then((post) => dispatch(deletePostItem(post)))
+    return deletePost(id)
+    .then(() => dispatch({
+        type: DELETE_POST,
+        id
+    }))
   }
 }
 
-export function handleAddPost (body,title,author, category, id, timestamp) {
+
+export function handleAddPost (body, title, category, author, id, timestamp) {
   return (dispatch) => {
 
     // dispatch(showLoading())
 
     return addPost({
-      id,
-      timestamp,
-      body,
-      title,
-      category,
-      author
+      body, title, category, author, id, timestamp
     })
       .then((post) => dispatch(newPost(post)))
       // .then(() => dispatch(hideLoading()))

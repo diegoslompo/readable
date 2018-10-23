@@ -5,7 +5,7 @@ import { handleAddPost } from '../actions/posts'
 class FormPost extends Component {
   state = {
     title: '',
-    selectedCategory: '',
+    category: '',
     author: '',
     body: '',
     id: '',
@@ -29,6 +29,7 @@ class FormPost extends Component {
       body
     }))
   }
+
   handleChangeCategory = (e) => {
     const category = e.target.value
     this.setState(() => ({
@@ -52,10 +53,10 @@ class FormPost extends Component {
     dispatch(handleAddPost(body, title, category, author, id, timestamp))
 
     this.setState(() => ({
-      body: '',
       title: '',
-      category: '',
       author: '',
+      body: '',
+      category: '',
     }))
   }
 
@@ -90,15 +91,12 @@ class FormPost extends Component {
             <select
               className="edit-card__select"
               value={category}
-              onChange={this.handleChangeCategory}>
+              onChange={this.handleChangeCategory}
+              >
               {categories && categories.map((category) => (
                 <option className="edit-card__option" key={category.path}>{category.name}</option>
               ))}
             </select>
-            {/* <select value={category} onChange={this.handleChangeCategory}>
-              <option> category 1</option>
-              <option> category 2</option>
-            </select> */}
             <textarea
               className="edit-card__textarea"
               value={body}
