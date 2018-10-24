@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as Icon from 'react-icons/md'
 import { formatDate } from '../utils/helpers'
-import { handleDeletePost } from '../actions/posts'
+import { handleDeletePost, handleVotePost } from '../actions/posts'
 // import { handleTrigerPost } from '../actions/posts'
 
 class Post extends Component {
@@ -11,6 +11,11 @@ class Post extends Component {
     id: '',
     edit: false,
   }
+
+  handleVote = (option) => {
+    const { dispatch, post } = this.props
+    dispatch(handleVotePost(post.id, option))
+  };
 
   handleDelete = (e) => {
     e.preventDefault()
@@ -57,8 +62,8 @@ class Post extends Component {
         </div>
         </div>
         <div className="post-card__actions">
-          <button className="post-card__actions-item post-card--upvote" onClick={this.handleUpVote}> <Icon.MdThumbUp /></button>
-          <button className="post-card__actions-item post-card--downvote"><Icon.MdThumbDown /></button>
+          <button className="post-card__actions-item post-card--upvote" onClick={() => this.handleVote('upVote')}> <Icon.MdThumbUp /></button>
+          <button className="post-card__actions-item post-card--downvote" onClick={() => this.handleVote('downVote')}><Icon.MdThumbDown /></button>
           <div className="post-card__score">{voteScore}</div>
         </div>
 

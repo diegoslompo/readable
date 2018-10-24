@@ -11,11 +11,17 @@ class NewPost extends Component {
 
   handleSubmit = (body, title, category, author) => {
 
+
+
     const { dispatch } = this.props
     const id = this.randomString()
     const timestamp = Date.now()
 
-    dispatch(handleAddPost(body, title, category, author, id, timestamp))
+    const objectNew = {
+      title, body, author, category , id, timestamp
+    }
+
+    dispatch(handleAddPost(objectNew))
   }
 
   render() {

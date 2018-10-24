@@ -1,9 +1,10 @@
-import { addPost, editPost, deletePost } from '../utils/api'
+import { addPost, editPost, deletePost, voteOnPost } from '../utils/api'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const VOTE_POST = 'VOTE_POST'
 
 export function receivePosts (posts) {
   return {
@@ -19,13 +20,18 @@ function newPost (post) {
   } 
 }
 
-export function handleAddPost (body, title, category, author, id, timestamp) {
+export function handleAddPost (post) {
   return (dispatch) => {
 
     // dispatch(showLoading())
 
     return addPost({
-      body, title, category, author, id, timestamp
+      body: post.body, 
+      title: post.title,
+      category: post.category,
+      author: post.author,
+      id: post.id,
+      timestamp: post.timestamp
     })
       .then((post) => dispatch(newPost(post)))
       // .then(() => dispatch(hideLoading()))
@@ -52,9 +58,21 @@ export function handleEditPost(postId, body, title) {
 export function handleDeletePost (id) {
   return (dispatch) => {
     return deletePost(id)
-    .then(() => dispatch({
+    .then((post) => dispatch({
         type: DELETE_POST,
-        id
+        post
+    }))
+  }
+}
+
+export function handleVotePost (id, option) {
+  return (dispatch) => {
+    return voteOnPost(id, option)
+    .then((post) => dispatch({
+        type: VOTE_POST,
+        post,
+        id,
+        option
     }))
   }
 }
