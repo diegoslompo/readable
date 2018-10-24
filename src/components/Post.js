@@ -9,22 +9,27 @@ class Post extends Component {
 
   state = {
     id: '',
+    edit: false,
   }
 
   handleDelete = (e) => {
     e.preventDefault()
-
     const { dispatch, post } = this.props
-    
     dispatch(handleDeletePost(post.id))
   }
+
+  handleEdit = () => {
+    // this.setState({
+    //   edit: !this.state.edit
+    // });
+  };
 
   render() {
     const { post} = this.props
 
-    if (post === null) {
-      return <p>This Post doesn't exist</p>
-    }
+    // if (post === null) {
+    //   return <p>This Post doesn't exist</p>
+    // }
 
     const {
       id, title, body, timestamp, author, category, voteScore, deleted, commentCount
@@ -44,7 +49,7 @@ class Post extends Component {
           <div className="post-card__description">{body}</div>
         </div>
         <div className="post-card__utils">
-        <div className="post-card__util-item"><Icon.MdEdit /></div>
+        <div className="post-card__util-item" onClick={this.handleEdit}><Icon.MdEdit /></div>
         <div className="post-card__util-item" onClick={this.handleDelete} ><Icon.MdDeleteSweep /></div>
         <div className="post-card__util-item">
           <Icon.MdModeComment />
@@ -56,6 +61,19 @@ class Post extends Component {
           <button className="post-card__actions-item post-card--downvote"><Icon.MdThumbDown /></button>
           <div className="post-card__score">{voteScore}</div>
         </div>
+
+        {/* <Modal show={this.state.edit} toggle={this.toggleEdit} onClose={this.toggleEdit}>
+          <PostForm edit post={this.props.post} onClose={this.toggleEdit} />
+        </Modal> */}
+
+        {/* <Modal
+          className='modal'
+          overlayClassName='overlay'
+          isOpen={postModalOpen}
+          contentLabel='Modal'>
+            <button className="edit-card edit-card__close"onClick={this.closePostModal}> <Icon.MdClose /> </button>
+            <FormPost post={post}/>
+        </Modal> */}
       </div>
     )
   }

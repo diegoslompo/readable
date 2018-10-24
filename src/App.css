@@ -282,7 +282,7 @@ body {
 }
 
 .edit-card__wrapper {
-  width: 70%;
+  /* width: 70%; */
   margin: 0 auto;
 }
 
@@ -349,21 +349,38 @@ button.edit-card--send {
   font-weight: 600;
 }
 
+button.edit-card--send:disabled {
+  background-color: #b0b0b0;
+}
+
+.overlay {
+  background: #00000063;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
 .modal {
-  position: absolute;
-  top: 40px;
-  left: 200px;
-  right: 200px;
-  bottom: 40px;
+  position: relative;
+  /* top: 122px; */
+  /* left: 200px; */
+  /* right: 200px; */
+  /* bottom: 80px; */
   border: 1px solid rgb(204, 204, 204);
   background: #f1f1f1;
-  overflow: auto;
+  /* overflow: auto; */
   border-radius: 4px;
   outline: none;
-  padding: 20px;
-  border-radius: 3px;
+  padding: 50px;
+  border-radius: 10px;
   box-shadow: 0 3px 8px 0 rgba(0,0,0,.24), 0 3px 12px 0 rgba(0,0,0,.12);
-  min-width: 300px;
+  min-width: 200px;
+  width: 490px;
 }
 
 .modal .edit-card {
@@ -375,13 +392,22 @@ button.edit-card--send {
 
 .modal button.edit-card.edit-card__close {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: -10px;
+  right: -10px;
   width: 55px;
   height: 55px;
   font-size: 45px;
   padding: 0px 10px;
-  border-radius: 0px 0px 0px 8px;
+  border-radius: 100px;
   background-color: #ff6262;
   color: #fff;
+}
+
+body.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.ReactModal__Overlay--after-open {
+  transition: 0.5s;
+  opacity: 1;
 }

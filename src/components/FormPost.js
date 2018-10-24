@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleAddPost } from '../actions/posts'
 
 class FormPost extends Component {
   state = {
@@ -29,7 +28,6 @@ class FormPost extends Component {
       body
     }))
   }
-
   handleChangeCategory = (e) => {
     const category = e.target.value
     this.setState(() => ({
@@ -37,20 +35,16 @@ class FormPost extends Component {
     }))
   }
 
-  randomString = () => {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-  }
-
-  handleSubmit = (e) => {
+  onForm = (e) => {
     e.preventDefault()
 
     const { body, title, category, author } = this.state
-    const { dispatch } = this.props
-    
-    const id = this.randomString()
-    const timestamp = Date.now()
+    const { onSubmit, onModal } = this.props
 
-    dispatch(handleAddPost(body, title, category, author, id, timestamp))
+
+    // onSubmit({body:body, title: title, category:category, author: author}) 
+    onSubmit(body, title, category, author) 
+    // onModal({modal:false}) 
 
     this.setState(() => ({
       title: '',
@@ -63,17 +57,15 @@ class FormPost extends Component {
 
 
   render() {
-    const { categories } = this.props
-    const { body, title, category, author } = this.state
+    const { categories, post} = this.props
 
-    {/* todo: Redirect to / if submitted */}
-
-    // const tweetLeft = 280 - text.length
+    // const {body, title, category, author } = postProps || postState
+    const {body, title, category, author } = post || this.state
 
     return (
       <div className="edit-card">
         <div className="edit-card__wrapper">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.onForm}>
             <input
               type="text"
               className="edit-card__input"

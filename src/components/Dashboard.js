@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
 import Modal from 'react-modal'
-import FormPost from './FormPost'
+import NewPost from './NewPost'
+// import FormPost from './FormPost'
 // import Category from './Category'
 import * as Icon from 'react-icons/md'
 
@@ -77,14 +78,9 @@ class Dashboard extends Component {
                 className='modal'
                 overlayClassName='overlay'
                 isOpen={postModalOpen}
-                contentLabel='Modal'
-              >
-                <button
-                className="edit-card edit-card__close"
-                onClick={this.closePostModal}
-                > <Icon.MdClose /> </button>
-
-                <FormPost/>
+                contentLabel='Modal'>
+                  <button className="edit-card edit-card__close"onClick={this.closePostModal}> <Icon.MdClose /> </button>
+                  <NewPost/>
               </Modal>
             </div>
           </section>
@@ -99,51 +95,8 @@ function mapStateToProps ({ posts, categories}) {
   return {
     categories: Object.values(categories),
     postIds: Object.keys(posts)
-      .sort((a,b) => posts[b].timestamp - posts[a].timestamp)
+      // .sort((a,b) => posts[b].timestamp - posts[a].timestamp)
   }
 }
 
-// const mapStateToProps = ({ categories }) => {
-//   return {
-//     categories: categories.categories
-//   }
-// }
-
 export default connect(mapStateToProps)(Dashboard)
-
-
-// class Dashboard extends Component {
-  
-//   state = {
-//     posts: [], 
-//   }
-
-  
-//   //get books the server API use the async + await
-//   async componentDidMount() {
-//     const posts = await DashboardAPI.getAllPosts()
-//     this.setState({ posts })
-//   }
-
-//   render() {
-
-//     const {posts} = this.state
-
-//     return (
-//       <div>
-//         <h3 className='center'>Your Timeline</h3>
-//         <ul className='dashboard-list'>
-//           {posts.map((p) => (
-//             <li key={p.id}>
-//               <a>{p.title}</a>
-//               {/* <Post id={p}/> */}
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     )
-//   }
-// }
-
-
-// export default Dashboard
