@@ -8,9 +8,13 @@ class EditPost extends Component {
   handleSubmit = (body, title) => {
 
     const { dispatch, post } = this.props
-    const postId = post.id
+    const id = post.id
 
-    dispatch(handleEditPost(postId, body, title))
+    // const objectNew = {
+    //   title, body
+    // }
+
+    dispatch(handleEditPost(id, body, title))
 
   }
 

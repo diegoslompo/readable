@@ -10,9 +10,7 @@ class NewPost extends Component {
   }
 
   handleSubmit = (body, title, category, author) => {
-
-
-
+    
     const { dispatch } = this.props
     const id = this.randomString()
     const timestamp = Date.now()

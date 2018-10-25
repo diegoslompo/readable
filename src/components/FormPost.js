@@ -60,7 +60,8 @@ class FormPost extends Component {
     const { categories, post} = this.props
 
     // const {body, title, category, author } = postProps || postState
-    const {body, title, category, author } = post || this.state
+    // const {body, title, category, author } = post || this.state
+    const {body, title, category, author } = this.state
 
     return (
       <div className="edit-card">

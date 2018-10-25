@@ -71,6 +71,13 @@ export const editPost = (postId, title, body) =>
     body: JSON.stringify({ title, body})
   }).then(res => res.json())
 
+//  export const editPost = (postId, post) =>
+//   fetch(`${api}/posts/${postId}`, {
+//     method: 'PUT',
+//     headers,
+//     body: JSON.stringify(post)
+//   }).then(res => res.json())
+
 export const deletePost = (postId) =>
   fetch(`${api}/posts/${postId}`, {
     method: 'DELETE',

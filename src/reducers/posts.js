@@ -20,15 +20,16 @@ export default function posts (state={}, action) {
       }
     case ADD_POST:
     case EDIT_POST:
-    case DELETE_POST:
       return {
         ...state,
-        // [post.id]: {
-        //   [post]: null
-        // }
         [post.id]: post
       }
 
+    case DELETE_POST:
+      return {
+        ...state,
+        [post.id]: null
+      }
       
     case VOTE_POST:
       return {

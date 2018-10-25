@@ -199,25 +199,28 @@ body {
   border-radius: 0 5px 5px 0;
   overflow: hidden;
   width: 40px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
 .post-card__util-item {
   border-bottom: 1px solid #e3e3e3;
   background-color: transparent;
-  height: 40px;
   display: flex;
   flex-wrap: wrap;
   color: #989898;
   align-items: center;
   transition: 0.3s;
   justify-content: center;
+  width: 100%;
 }
 
 .post-card__util-item:last-child {
   border: 0;
   padding: 10px 0;
   color: #00ca9c;
+  flex-direction: column;
 }
 
 .post-card__util-item:hover {
@@ -246,11 +249,19 @@ body {
   border-radius: 0px 50px 0px 10px;
   bottom: 22px;
   left: -39px;
-  background: #bababa;
+  background: #353535;
   height: 26px;
   width: 22px;
   line-height: 3.3;
   padding-left: 8px;
+}
+
+.post-card__score--up {
+  background: #00c89a;
+}
+
+.post-card__score--down {
+  background: #ff6363;
 }
 
 .post-card__top {

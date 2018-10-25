@@ -45,11 +45,13 @@ function newEditPost (post) {
   } 
 }
 
-export function handleEditPost(postId, body, title) {
+export function handleEditPost(id, body, title) {
   return (dispatch) => {
-
+    debugger
     return editPost({
-      postId, body, title
+      id,
+      body, 
+      title
     })
       .then((post) => dispatch(newEditPost(post)))
   }

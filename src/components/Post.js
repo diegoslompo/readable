@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import * as Icon from 'react-icons/md'
 import { formatDate } from '../utils/helpers'
 import { handleDeletePost, handleVotePost } from '../actions/posts'
-// import { handleTrigerPost } from '../actions/posts'
+import EditPost from './EditPost'
+import Modal from 'react-modal'
+
 
 class Post extends Component {
 
   state = {
     id: '',
     edit: false,
+    postModalOpen: false
   }
 
   handleVote = (option) => {
@@ -23,24 +26,30 @@ class Post extends Component {
     dispatch(handleDeletePost(post.id))
   }
 
-  handleEdit = () => {
+  handleEdit = (e) => {
+    
+    this.openPostModal()
     // this.setState({
     //   edit: !this.state.edit
     // });
   };
 
+  openPostModal = () => this.setState(() => ({ postModalOpen: true }))
+  closePostModal = () => this.setState(() => ({ postModalOpen: false }))
+
   render() {
     const { post} = this.props
 
-    // if (post === null) {
-    //   return <p>This Post doesn't exist</p>
-    // }
+    if (post === null) {
+      return <p></p>
+    }
+
+    const { postModalOpen } = this.state
 
     const {
       id, title, body, timestamp, author, category, voteScore, deleted, commentCount
     } = post
 
-    console.log(this.props)
     return (
       <div className="post-card__item">
         <div className="post-card__info">
@@ -64,27 +73,30 @@ class Post extends Component {
         <div className="post-card__actions">
           <button className="post-card__actions-item post-card--upvote" onClick={() => this.handleVote('upVote')}> <Icon.MdThumbUp /></button>
           <button className="post-card__actions-item post-card--downvote" onClick={() => this.handleVote('downVote')}><Icon.MdThumbDown /></button>
-          <div className="post-card__score">{voteScore}</div>
+          <div className={`post-card__score ${voteScore > 0 ? 'post-card__score--up': voteScore < 0 ? 'post-card__score--down': ''}`} >{voteScore}</div>
         </div>
 
-        {/* <Modal show={this.state.edit} toggle={this.toggleEdit} onClose={this.toggleEdit}>
-          <PostForm edit post={this.props.post} onClose={this.toggleEdit} />
-        </Modal> */}
-
-        {/* <Modal
+        <Modal
           className='modal'
           overlayClassName='overlay'
           isOpen={postModalOpen}
           contentLabel='Modal'>
-            <button className="edit-card edit-card__close"onClick={this.closePostModal}> <Icon.MdClose /> </button>
-            <FormPost post={post}/>
-        </Modal> */}
+            <button className="edit-card edit-card__close" onClick={this.closePostModal}> <Icon.MdClose /> </button>
+            <EditPost post={this.props.post} />
+            {/* <div>{this.props.post}</div> */}
+        </Modal>
+
+          {/* <Modal show={this.state.edit} toggle={this.toggleEdit} onClose={this.toggleEdit}>
+            <PostForm edit post={this.props.post} onClose={this.toggleEdit} />
+          </Modal> */}
+
       </div>
     )
   }
 }
 
 function mapStateToProps ({posts}, { id }) {
+  
   const post = posts[id]
   // const parentPost = post ? posts[post.replyingTo] : null
 
