@@ -27,7 +27,6 @@ class Post extends Component {
   }
 
   handleEdit = (e) => {
-    
     this.openPostModal()
     // this.setState({
     //   edit: !this.state.edit
@@ -82,14 +81,9 @@ class Post extends Component {
           isOpen={postModalOpen}
           contentLabel='Modal'>
             <button className="edit-card edit-card__close" onClick={this.closePostModal}> <Icon.MdClose /> </button>
-            <EditPost post={this.props.post} />
+            <EditPost post={post} />
             {/* <div>{this.props.post}</div> */}
         </Modal>
-
-          {/* <Modal show={this.state.edit} toggle={this.toggleEdit} onClose={this.toggleEdit}>
-            <PostForm edit post={this.props.post} onClose={this.toggleEdit} />
-          </Modal> */}
-
       </div>
     )
   }

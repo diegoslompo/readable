@@ -39,14 +39,6 @@ export const getAllPostsInCategory = (category) =>
     .then(res => res.json())
     .then(data => data)
 
-// export const addPost = (title, body, author, category) =>
-//   fetch(`${api}/posts`, {
-//     method: 'POST',
-//     headers: headers,
-//     body: JSON.stringify({ title, body, author, category, id: randomString(20), timestamp:Date.now()})
-//   }).then(res => res.json())
-
-
 export const addPost = (newPost) =>
   fetch(`${api}/posts`, {
     method: 'POST',
@@ -59,17 +51,15 @@ export const addPost = (newPost) =>
   })
   .then(data => data.json())
 
-  
-// export function randomString(length) {
-//   return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
-// }
 
-export const editPost = (postId, title, body) =>
+export const editPost = (postId, body, title) =>
   fetch(`${api}/posts/${postId}`, {
     method: 'PUT',
     headers: headers,
-    body: JSON.stringify({ title, body})
+    body: JSON.stringify({body, title})
   }).then(res => res.json())
+
+
 
 //  export const editPost = (postId, post) =>
 //   fetch(`${api}/posts/${postId}`, {
@@ -87,13 +77,6 @@ export const deletePost = (postId) =>
     },
   }).then(res => res.json())
   .then(data => data)
-
-// export const voteOnPost = (postId, thumbsUp) =>
-//   fetch(`${api}/posts/${postId}`, {
-//     method: 'POST',
-//     headers: headers,
-//     body: JSON.stringify({'option': thumbsUp? 'upVote' : 'downVote'})
-//   }).then(res => res.json())
 
 export const voteOnPost = (id, option) =>
   fetch(`${api}/posts/${id}`, {

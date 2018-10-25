@@ -10,12 +10,27 @@ class FormPost extends Component {
     id: '',
   }
 
+
+  componentDidMount() {
+    if (this.props.post) {
+      const { author, title, category, body } = this.props.post;
+      this.setState({
+        author,
+        title,
+        category,
+        body
+      });
+    }
+  }
+  
+
   handleChangeTitle = (e) => {
     const title = e.target.value
     this.setState(() => ({
       title
     }))
   }
+
   handleChangeAuthor = (e) => {
     const author = e.target.value
     this.setState(() => ({
@@ -41,7 +56,6 @@ class FormPost extends Component {
     const { body, title, category, author } = this.state
     const { onSubmit, onModal } = this.props
 
-
     // onSubmit({body:body, title: title, category:category, author: author}) 
     onSubmit(body, title, category, author) 
     // onModal({modal:false}) 
@@ -53,8 +67,6 @@ class FormPost extends Component {
       category: '',
     }))
   }
-
-
 
   render() {
     const { categories, post} = this.props
@@ -72,7 +84,7 @@ class FormPost extends Component {
               className="edit-card__input"
               placeholder="Title"
               value={title}
-              onChange={this.handleChangeTitle}
+							onChange={this.handleChangeTitle}
             />
             <input
               type="text"
@@ -80,6 +92,7 @@ class FormPost extends Component {
               placeholder="Your Name"
               value={author}
               onChange={this.handleChangeAuthor}
+              required
             />
             <select
               className="edit-card__select"

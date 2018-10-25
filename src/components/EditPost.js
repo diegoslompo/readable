@@ -6,15 +6,12 @@ import FormPost from './FormPost'
 class EditPost extends Component {
 
   handleSubmit = (body, title) => {
-
+ 
     const { dispatch, post } = this.props
-    const id = post.id
+    const postId = post.id
+    const objectNew = { postId, title, body}
 
-    // const objectNew = {
-    //   title, body
-    // }
-
-    dispatch(handleEditPost(id, body, title))
+    dispatch(handleEditPost(postId, objectNew))
 
   }
 

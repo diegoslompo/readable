@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component , Fragment } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
 import Modal from 'react-modal'
 import NewPost from './NewPost'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 // import FormPost from './FormPost'
 // import Category from './Category'
 import * as Icon from 'react-icons/md'
@@ -21,18 +22,26 @@ class Dashboard extends Component {
 
     const { postModalOpen } = this.state
 
+
+
+
+    // <Link to='/search'> Add a book </Link>
+
     return (
+
       <Router>
-        <div>
+        <Fragment>
           <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet"></link>
           <header className="header">
             <div className="container">
               <div className="row">
                 <div className="col-xs-4">
-                  <a href="" className="header__logo">
-                    <Icon.MdFilterDrama />
-                    <div className="header--title">ReadAble</div>
-                  </a>
+                  <NavLink to='/'>
+                    <div className="header__logo">
+                      <Icon.MdFilterDrama />
+                      <div className="header--title">ReadAble</div>
+                    </div>
+                  </NavLink>
                 </div>
                 <div className="col-xs-8 header__right">
                   <ul className="header__categories">
@@ -56,42 +65,48 @@ class Dashboard extends Component {
             </div>
           </header>
           <main>
-            <section>
-              {/* <Route path="/" component={PostList} />
-              <Route path="/category" component={PostList} /> */}
-              <div className="post-card">
+
+            <Route path='/category' render={() => (
+                <span> testeeeeeee </span>
+            )} />
+
+            <Route exact path='/'  render={() => (
+              <section>
+                {/* <Route path="/" component={PostList} />
+                <Route path="/category" component={PostList} /> */}
+                <div className="post-card">
+                  <div className="container">
+                    <ul>
+                      {this.props.postIds.map((id) => (
+                        <li key={id} >
+                          <Post id={id}/>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
                 <div className="container">
-                  <ul>
-                    {this.props.postIds.map((id) => (
-                      <li key={id} >
-                        <Post id={id}/>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="edit-card">
+                    <button
+                      className="edit-card__title"
+                      onClick={this.openPostModal}
+                      > Create your post</button>
+                  </div>
+                  <Modal
+                    className='modal'
+                    overlayClassName='overlay'
+                    isOpen={postModalOpen}
+                    contentLabel='Modal'>
+                      <button className="edit-card edit-card__close"onClick={this.closePostModal}> <Icon.MdClose /> </button>
+                      <NewPost/>
+                  </Modal>
                 </div>
-              </div>
-            </section>
-            <section>
-              <div className="container">
-                <div className="edit-card">
-                  <button
-                    className="edit-card__title"
-                    onClick={this.openPostModal}
-                    > Create your post</button>
-                </div>
-                <Modal
-                  className='modal'
-                  overlayClassName='overlay'
-                  isOpen={postModalOpen}
-                  contentLabel='Modal'>
-                    <button className="edit-card edit-card__close"onClick={this.closePostModal}> <Icon.MdClose /> </button>
-                    <NewPost/>
-                </Modal>
-              </div>
-            </section>
+              </section>
+            )}/>    
           </main>
-        </div>
+        </Fragment>
       </Router>
+
     )
   }
 }

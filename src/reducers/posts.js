@@ -1,5 +1,4 @@
 import {RECEIVE_POSTS, ADD_POST, DELETE_POST, EDIT_POST, VOTE_POST} from '../actions/posts'
-// import { RECEIVE_TWEETS, TOGGLE_TWEET } from '../actions/tweets'
 
 export default function posts (state={}, action) {
 
@@ -11,18 +10,27 @@ export default function posts (state={}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       const apiPosts = arrayToObject(action.posts, 'id')
-    
+
       return {
         // retorna porção do state vazio de inicio, recria
-        ...state,
         ...apiPosts
 
       }
     case ADD_POST:
-    case EDIT_POST:
       return {
         ...state,
         [post.id]: post
+      }
+
+    case EDIT_POST:
+      debugger
+      return {
+        ...state,
+        [post.postId]: {
+          ...state[post.postId],
+          title: post.title,
+          body: post.body
+        }
       }
 
     case DELETE_POST:

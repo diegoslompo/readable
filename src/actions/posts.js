@@ -22,7 +22,7 @@ function newPost (post) {
 
 export function handleAddPost (post) {
   return (dispatch) => {
-
+    debugger
     // dispatch(showLoading())
 
     return addPost({
@@ -38,24 +38,42 @@ export function handleAddPost (post) {
   }
 }
 
-function newEditPost (post) {
-  return {
-    type: EDIT_POST,
-    post,
-  } 
-}
+// function newEditPost (post) {
+//   return {
+//     type: EDIT_POST,
+//     post,
+//   } 
+// }
 
-export function handleEditPost(id, body, title) {
+// export function handleEditPost(postId, post) {
+//   return (dispatch) => {
+//     debugger
+//     return editPost(
+//       postId,
+//       {
+//         body: post.body, 
+//         title: post.title,
+//         category: post.category,
+//         author: post.author,
+//         id: post.postId,
+//         timestamp: post.timestamp
+//     })
+//       .then(() => dispatch(newEditPost(post)))
+//   }
+// }
+
+export function handleEditPost(postId, post) {
+  debugger
   return (dispatch) => {
-    debugger
-    return editPost({
-      id,
-      body, 
-      title
-    })
-      .then((post) => dispatch(newEditPost(post)))
+    return editPost(postId, { body: post.body, title: post.title })
+    .then(() => dispatch({
+        type: EDIT_POST,
+        post,
+        postId
+    }))
   }
 }
+
 
 export function handleDeletePost (id) {
   return (dispatch) => {
