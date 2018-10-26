@@ -17,15 +17,27 @@ class Dashboard extends Component {
 
   openPostModal = () => this.setState(() => ({ postModalOpen: true }))
   closePostModal = () => this.setState(() => ({ postModalOpen: false }))
+  
 
   render() {
 
     const { postModalOpen } = this.state
+    const { categories, match } = this.props
+
+    const { posts, category} = this.props
+
+    // const {category} = this.props.match.params.category;
 
 
+    console.log(category)
 
 
-    // <Link to='/search'> Add a book </Link>
+ 
+
+
+    // const categoryPosts = posts.filter(data => data.category === category)
+
+    // console.log(categoryPosts)
 
     return (
 
@@ -45,13 +57,17 @@ class Dashboard extends Component {
                 </div>
                 <div className="col-xs-8 header__right">
                   <ul className="header__categories">
-                    {this.props.categories.map((item) => (
+
+                    {categories.map((item) => (
                       <li className="header__category" key={item.name} >
-                        {item.name}
+                        <NavLink to={`/category/${item.path}`}>{item.name}</NavLink>
                         {/* <Link to="/category">{item.name}</Link> */}
                         {/* <Category id={item.name}/> */}
                       </li>
                     ))}
+                    <li className="header__category">
+                      <NavLink to="/">Show All</NavLink>
+                    </li>
                   </ul>
                   <div className="header__grid"><Icon.MdApps /></div>
                   <select className="header__filter">
@@ -65,15 +81,19 @@ class Dashboard extends Component {
             </div>
           </header>
           <main>
+            {/* <div>
+              {!category
+                  ? isDeleted.map(post => <Post key={post.id} post={post} />)
+                  : categoryPosts.map(post => <Post key={post.id} post={post} />)}
 
-            <Route path='/category' render={() => (
+            </div> */}
+
+            {/* <Route path='/category' render={() => (
                 <span> testeeeeeee </span>
-            )} />
+            )} /> */}
 
             <Route exact path='/'  render={() => (
               <section>
-                {/* <Route path="/" component={PostList} />
-                <Route path="/category" component={PostList} /> */}
                 <div className="post-card">
                   <div className="container">
                     <ul>
@@ -112,9 +132,13 @@ class Dashboard extends Component {
 }
 
 
-function mapStateToProps ({ posts, categories}) {
+function mapStateToProps ({ posts, categories}, {match}) {
+
+  console.log(match)
+
   return {
     categories: Object.values(categories),
+    posts: posts,
     postIds: Object.keys(posts)
       // .sort((a,b) => posts[b].timestamp - posts[a].timestamp)
   }

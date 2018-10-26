@@ -28,9 +28,6 @@ class Post extends Component {
 
   handleEdit = (e) => {
     this.openPostModal()
-    // this.setState({
-    //   edit: !this.state.edit
-    // });
   };
 
   openPostModal = () => this.setState(() => ({ postModalOpen: true }))
