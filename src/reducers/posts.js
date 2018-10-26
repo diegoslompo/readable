@@ -23,7 +23,6 @@ export default function posts (state={}, action) {
       }
 
     case EDIT_POST:
-      debugger
       return {
         ...state,
         [post.postId]: {
@@ -36,7 +35,7 @@ export default function posts (state={}, action) {
     case DELETE_POST:
       return {
         ...state,
-        [post.id]: null
+        [post.id]: post
       }
       
     case VOTE_POST:

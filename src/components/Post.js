@@ -36,9 +36,9 @@ class Post extends Component {
   render() {
     const { post} = this.props
 
-    if (post === null) {
-      return <p></p>
-    }
+    // if (post === null) {
+    //   return <p></p>
+    // }
 
     const { postModalOpen } = this.state
 
@@ -78,7 +78,7 @@ class Post extends Component {
           isOpen={postModalOpen}
           contentLabel='Modal'>
             <button className="edit-card edit-card__close" onClick={this.closePostModal}> <Icon.MdClose /> </button>
-            <EditPost post={post} />
+            <EditPost post={post} onModalClose={this.closePostModal} />
             {/* <div>{this.props.post}</div> */}
         </Modal>
       </div>

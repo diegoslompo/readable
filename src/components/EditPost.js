@@ -16,11 +16,11 @@ class EditPost extends Component {
   }
 
   render() {
-    const { post} = this.props
+    const { post } = this.props
     return (
       <div className="edit-card">
         <div className="edit-card__wrapper">
-          <FormPost submitBtnText='Publish' onSubmit={this.handleSubmit} post={post}/>
+          <FormPost submitBtnText='Publish' onSubmit={this.handleSubmit} post={post} onModalClose={this.props.onModalClose}/>
         </div>
       </div>
     )

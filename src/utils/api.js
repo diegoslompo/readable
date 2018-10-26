@@ -52,21 +52,24 @@ export const addPost = (newPost) =>
   .then(data => data.json())
 
 
-export const editPost = (postId, body, title) =>
-  fetch(`${api}/posts/${postId}`, {
-    method: 'PUT',
-    headers: headers,
-    body: JSON.stringify({body, title})
-  }).then(res => res.json())
-
-
-
-//  export const editPost = (postId, post) =>
+// export const editPost = (postId, body, title) =>
 //   fetch(`${api}/posts/${postId}`, {
 //     method: 'PUT',
-//     headers,
-//     body: JSON.stringify(post)
+//     headers: headers,
+//     body: JSON.stringify({body, title})
 //   }).then(res => res.json())
+
+
+
+ export const editPost = (postId, post) =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  }).then(res => res.json())
 
 export const deletePost = (postId) =>
   fetch(`${api}/posts/${postId}`, {

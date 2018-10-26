@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Modal from 'react-modal'
 
 class FormPost extends Component {
   state = {
@@ -7,7 +8,7 @@ class FormPost extends Component {
     category: '',
     author: '',
     body: '',
-    id: '',
+    id: ''
   }
 
 
@@ -56,26 +57,23 @@ class FormPost extends Component {
     const { body, title, category, author } = this.state
     const { onSubmit, onModal } = this.props
 
-    // onSubmit({body:body, title: title, category:category, author: author}) 
-    onSubmit(body, title, category, author) 
-    // onModal({modal:false}) 
+    onSubmit(body, title, category, author)
 
-    this.setState(() => ({
-      title: '',
-      author: '',
-      body: '',
-      category: '',
-    }))
+    this.closePostModal()
+  }
+
+  closePostModal = () => {
+    this.props.onModalClose()
   }
 
   render() {
     const { categories, post} = this.props
-
-    // const {body, title, category, author } = postProps || postState
-    // const {body, title, category, author } = post || this.state
     const {body, title, category, author } = this.state
 
+    
+
     return (
+      
       <div className="edit-card">
         <div className="edit-card__wrapper">
           <form onSubmit={this.onForm}>
@@ -92,13 +90,13 @@ class FormPost extends Component {
               placeholder="Your Name"
               value={author}
               onChange={this.handleChangeAuthor}
-              required
             />
             <select
               className="edit-card__select"
               value={category}
               onChange={this.handleChangeCategory}
               >
+              <option value="select">Select category</option>
               {categories && categories.map((category) => (
                 <option className="edit-card__option" key={category.path}>{category.name}</option>
               ))}
@@ -111,7 +109,8 @@ class FormPost extends Component {
             <button
               type="submit"
               className="edit-card__button edit-card--send"
-              disabled={body === ''}>
+              disabled={body === ''}
+              >
               Submit
             </button>
             <button

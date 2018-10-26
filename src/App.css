@@ -418,10 +418,6 @@ button.edit-card--send:disabled {
   color: #fff;
 }
 
-body.ReactModal__Body--open {
-  overflow: hidden;
-}
-
 .ReactModal__Overlay--after-open {
   transition: 0.5s;
   opacity: 1;
