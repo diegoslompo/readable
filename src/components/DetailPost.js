@@ -1,35 +1,42 @@
 import React, { Component } from 'react'
-import Post from './Post'
+import {receiveComments} from '../actions/comments'
+// import Post from './Post'
+// import Comment from './Comment';
 import { connect } from 'react-redux'
 
 class DetailPost extends Component {
 
+    componentDidMount() {
+      this.props.dispatch(receiveComments(this.props.match.params.postId))
+    }
+
     render() {
 
-        const { postIds} = this.props
+        const { comments} = this.props
+        // debugger
         
         return (
     
             <div className="">
               <div className="">
-              <div className="">
-                <div className="">
-                    <ul>
-                        {postIds.map(post => (
-                            <li key={post.id} >
-                                <Post id={post.id}/>
-                            </li>
-                        ))}
-                        </ul>
-                    </div>
-                </div>
+                {/* <div className="">
+                  <div className="">
+                      <ul>
+                          {postIds.map(post => (
+                              <li key={post.id} >
+                                  <Post id={post.id}/>
+                              </li>
+                          ))}
+                      </ul>
+                  </div>
+                </div> */}
                 {/* <Post key={post.id} post={post} onDelete={this.handleDelete} /> */}
                 <div className="">
                   <div className="">
                     <h2>Comments</h2>
-                    {/* {comments.map(comment => (
+                    {/* {commentsIds.map(comment => (
                       <div key={comment.id}>
-                        <Comments comment={comment} />
+                        <Comment comment={comment} />
                       </div>
                     ))} */}
                   </div>
@@ -45,24 +52,18 @@ class DetailPost extends Component {
     }
 }
 
-function mapStateToProps ({posts}, { id }) {
-    const post = posts[id]
+function mapStateToProps ({posts,comments}, {match}) {
+
+    console.log(match)
+    debugger
+
     return {
-      post: post,
-      postIds: Object.values(posts)
+        // categories: Object.values(categories),
+        postsIds: Object.values(posts),
+        comments: comments
+        // comments: comments[match.params.postId]
+
     }
-  }
-
-// function mapStateToProps ({ posts}, {match}) {
-
-//     console.log(match)
-
-//     return {
-//         categories: Object.values(categories),
-//         posts: posts,
-//         postIds: Object.values(posts)
-
-//     }
-// }
+}
 
 export default connect(mapStateToProps)(DetailPost)

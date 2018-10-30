@@ -12,10 +12,12 @@ const headers = {
 export function getInitialData () {
   return Promise.all([
     getAllPosts(),
-    getCategories()
-  ]).then(([posts, categories]) => ({
+    getCategories(),
+    getCommentsForPost()
+  ]).then(([posts, categories, comments]) => ({
     posts,
-    categories
+    categories,
+    comments,
   }))
 }
 

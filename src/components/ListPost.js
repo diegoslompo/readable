@@ -70,6 +70,7 @@ class ListPost extends Component {
 function mapStateToProps ({ posts, categories}, {match}) {
 
   console.log(match)
+  // debugger
 
   return {
     categories: Object.values(categories),
