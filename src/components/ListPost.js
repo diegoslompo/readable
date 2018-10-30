@@ -6,7 +6,7 @@ import NewPost from './NewPost'
 import * as Icon from 'react-icons/md'
 
 
-class DetailPost extends Component {
+class ListPost extends Component {
 
   state = {
     postModalOpen: false
@@ -79,4 +79,4 @@ function mapStateToProps ({ posts, categories}, {match}) {
   }
 }
 
-export default connect(mapStateToProps)(DetailPost)
+export default connect(mapStateToProps)(ListPost)

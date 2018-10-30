@@ -4,6 +4,7 @@ import * as Icon from 'react-icons/md'
 import { formatDate } from '../utils/helpers'
 import { handleDeletePost, handleVotePost } from '../actions/posts'
 import EditPost from './EditPost'
+import { NavLink } from 'react-router-dom'
 import Modal from 'react-modal'
 
 
@@ -52,7 +53,9 @@ class Post extends Component {
           <div className="post-card__top">
             <div className="post-card__avatar"><Icon.MdLocalLibrary /></div>
             <div className="post-card__write">
-              <div className="post-card__title"> {title} </div>
+              <NavLink to={`/category/${category}/${id}`}>
+                <div className="post-card__title"> {title} </div>
+              </NavLink>
               <div className="post-card__date"> {formatDate(timestamp)}, by {author} in <b>{category}</b> </div>
             </div>
           </div>

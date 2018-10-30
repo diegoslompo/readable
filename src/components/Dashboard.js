@@ -1,6 +1,7 @@
 import React, { Component , Fragment } from 'react'
 import { connect } from 'react-redux'
 import ListPost from './ListPost'
+import DetailPost from './DetailPost'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import * as Icon from 'react-icons/md'
@@ -29,7 +30,6 @@ class Dashboard extends Component {
                 </div>
                 <div className="col-xs-8 header__right">
                   <ul className="header__categories">
-
                     {categories.map((item) => (
                       <li className="header__category" key={item.name} >
                         <NavLink to={`/category/${item.path}`}>{item.name}</NavLink>
@@ -55,7 +55,8 @@ class Dashboard extends Component {
             )} />
             <Route exact path='/'  render={(props) => (
               <ListPost {...props}/>
-            )}/>    
+            )}/>
+            <Route path="/category/:category/:postId" component={DetailPost} /> 
           </main>
         </Fragment>
       </Router>
