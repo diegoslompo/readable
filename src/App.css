@@ -422,3 +422,67 @@ button.edit-card--send:disabled {
   transition: 0.5s;
   opacity: 1;
 }
+
+.post-comment .post-card__item {
+  background: transparent;
+  border: 1px solid #ccc;
+  box-shadow: none;
+  width: 90%;
+}
+
+.post-comment .post-card__info {
+  padding: 15px 25px;
+}
+
+.post-comment .post-card__top {
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+  border-bottom: 1px solid #ccc;
+}
+
+.post-comment .post-card__write {
+  padding: 0;
+}
+
+.post-comment .post-card__utils {
+  background: transparent;
+  border-left: 1px solid #ccc;
+}
+
+.post-comment .post-card__util-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.post-comment .post-card__util-item:last-child {
+  border: 0;
+}
+
+.post-comment .post-card__actions-item {
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+.post-comment__title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #888;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.post-comment__not {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff5858;
+  text-align: center;
+  margin-bottom: 15px;
+  
+}
+
+.post-comment {
+  background: #fff;
+  padding: 30px 30px 15px 30px;
+  width: 64%;
+  margin: 0 auto;
+  border-radius: 6px;
+}

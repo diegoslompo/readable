@@ -31,16 +31,9 @@ class ListPost extends Component {
           <div className="container">
             <ul>
               {!category
-              ? NoDeleted.map(post => (
-                <li key={post.id} >
-                  <Post id={post.id}/>
-                </li>
-              ))
-              : categoryPosts.map(post => (
-                <li key={post.id} >
-                  <Post id={post.id}/>
-                </li>
-              ))}
+                ? NoDeleted.map(post => (<li key={post.id} ><Post id={post.id}/></li>))
+                : categoryPosts.map(post => (<li key={post.id} ><Post id={post.id}/></li>))
+              }
             </ul>
           </div>
         </div>

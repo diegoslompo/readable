@@ -2,7 +2,7 @@ import React, { Component , Fragment } from 'react'
 import { connect } from 'react-redux'
 import ListPost from './ListPost'
 import DetailPost from './DetailPost'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import * as Icon from 'react-icons/md'
 
@@ -50,13 +50,11 @@ class Dashboard extends Component {
             </div>
           </header>
           <main>
-            <Route path='/category/:category' render={(props) => (
-              <ListPost {...props}/>
-            )} />
-            <Route exact path='/'  render={(props) => (
-              <ListPost {...props}/>
-            )}/>
-            <Route path="/category/:category/:postId" component={DetailPost} /> 
+            <Switch>
+              <Route exact path='/'  render={(props) => (<ListPost {...props}/>)}/>
+              <Route path="/category/:category/:postId" component={DetailPost} />
+              <Route path='/category/:category' render={(props) => (<ListPost {...props}/>)} />
+            </Switch>
           </main>
         </Fragment>
       </Router>
