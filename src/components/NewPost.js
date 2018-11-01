@@ -26,7 +26,7 @@ class NewPost extends Component {
     return (
       <div className="edit-card">
         <div className="edit-card__wrapper">
-          <FormPost submitBtnText='Publish' onSubmit={this.handleSubmit} onModalClose={this.props.onModalClose}/>
+          <FormPost subimitText='Submit' onSubmit={this.handleSubmit} onModalClose={this.props.onModalClose}/>
         </div>
       </div>
     )

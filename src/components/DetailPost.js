@@ -21,18 +21,13 @@ class DetailPost extends Component {
     }
 
     render() {
-      const { commentsIds, postsIds} = this.props
+      const { commentsIds, postsIds, postParam} = this.props
       const { commentModalOpen } = this.state
       // debugger
     
-    
-        // const NoDeleted = postIds.filter(post => post.deleted !== true);
-        // const categoryPosts = postIds.filter(post => post.category === category && post.deleted !== true)
-
-        // debugger
+      const NoDeleted = commentsIds.filter(comment => comment.deleted !== true);
         
         return (
-    
             <section>
               <div className="post-card">
                 <div className="container">
@@ -41,20 +36,19 @@ class DetailPost extends Component {
                   ))}
                   <div className="">
                     <div className="post-comment">
-                    { commentsIds.length > 0 ? (
                       <div>
                         <div className="post-comment__title">Comments Post</div>
-                        {commentsIds.map(comment => (
+                        {NoDeleted.length > 0 ?
+                          NoDeleted.map(comment => (
                           <div key={comment.id}>
                             <Comment id={comment.id}/>
                           </div>
-                        ))}
+                        )): (
+                          <div>
+                            <div className="post-comment__not">Sorry 0 Comments :/</div>
+                          </div>
+                        )}
                       </div>
-                    ):(
-                      <div>
-                        <div className="post-comment__not">Not Found Comments</div>
-                      </div>
-                    )}
                       <div className="edit-card">
                         <button
                           className="edit-card__title"
@@ -68,7 +62,7 @@ class DetailPost extends Component {
                       isOpen={commentModalOpen}
                       contentLabel='Modal'>
                         <button className="edit-card edit-card__close" onClick={this.closeCommentModal}> <Icon.MdClose /> </button>
-                        <NewComment onModalClose={this.closeCommentModal} />
+                        <NewComment onModalClose={this.closeCommentModal} parentId={postParam} />
                     </Modal>
                     <div className="">
                       {/* <CommentForm parentId={this.props.match.params.postId} /> */}
@@ -94,7 +88,8 @@ function mapStateToProps ({posts,comments}, {match}) {
     return {
         // categories: Object.values(categories),
         commentsIds: Object.values(comments),
-        postsIds: post
+        postsIds: post,
+        postParam
         // comments: comments[match.params.postId]
 
     }

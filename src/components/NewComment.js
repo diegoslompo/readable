@@ -4,20 +4,21 @@ import { handleAddComment } from '../actions/comments'
 import FormComment from './FormComment'
 
 class NewComment extends Component {
-
+  
   randomString = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
   }
-
+  
+  
   handleSubmit = (body, author) => {
     
-    const { dispatch } = this.props
-
+    const { dispatch} = this.props
     const id = this.randomString()
     const timestamp = Date.now()
+    const parentId = this.props.parentId
 
     const objectNew = {
-      body, author, id, timestamp
+      body, author, id, timestamp, parentId
     }
 
     dispatch(handleAddComment(objectNew))
@@ -27,12 +28,12 @@ class NewComment extends Component {
     return (
       <div className="edit-card">
         <div className="edit-card__wrapper">
-          <FormComment submitBtnText='Publish' onSubmit={this.handleSubmit} onModalClose={this.props.onModalClose}/>
+          <FormComment submitText='submit' onSubmit={this.handleSubmit} onModalClose={this.props.onModalClose}/>
         </div>
       </div>
     )
   }
 }
 
-  
+
 export default connect()(NewComment)

@@ -20,7 +20,7 @@ class EditPost extends Component {
     return (
       <div className="edit-card">
         <div className="edit-card__wrapper">
-          <FormPost submitBtnText='Publish' onSubmit={this.handleSubmit} post={post} onModalClose={this.props.onModalClose}/>
+          <FormPost edit subimitText='Edit' onSubmit={this.handleSubmit} post={post} onModalClose={this.props.onModalClose}/>
         </div>
       </div>
     )

@@ -36,7 +36,7 @@ class Dashboard extends Component {
                       </li>
                     ))}
                     <li className="header__category">
-                      <NavLink to="/">Show All</NavLink>
+                      <NavLink to="/"><b>Show All</b></NavLink>
                     </li>
                   </ul>
                   <select className="header__filter">
@@ -56,6 +56,14 @@ class Dashboard extends Component {
               <Route path='/category/:category' render={(props) => (<ListPost {...props}/>)} />
             </Switch>
           </main>
+          <footer className="footer">
+            <div className="container">
+              <div className="footer__block">
+                <div className="footer__copyright">Diego Slompo 2018</div>
+                <div className="footer__create">Create with ♥ React</div>
+              </div>        
+            </div>
+          </footer>
         </Fragment>
       </Router>
 

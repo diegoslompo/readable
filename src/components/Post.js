@@ -56,7 +56,11 @@ class Post extends Component {
               <NavLink to={`/category/${category}/${id}`}>
                 <div className="post-card__title"> {title} </div>
               </NavLink>
-              <div className="post-card__date"> {formatDate(timestamp)}, by {author} in <b>{category}</b> </div>
+              <div className="post-card__date"> {formatDate(timestamp)}, by {author} in 
+                <b>
+                  <NavLink to={`/category/${category}`}>{category}</NavLink>
+                </b>
+              </div>
             </div>
           </div>
           <div className="post-card__description">{body}</div>
@@ -82,7 +86,6 @@ class Post extends Component {
           contentLabel='Modal'>
             <button className="edit-card edit-card__close" onClick={this.closePostModal}> <Icon.MdClose /> </button>
             <EditPost post={post} onModalClose={this.closePostModal} />
-            {/* <div>{this.props.post}</div> */}
         </Modal>
       </div>
     )

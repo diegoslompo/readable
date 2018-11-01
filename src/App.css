@@ -6,6 +6,11 @@
   list-style: none;
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
+  outline: 0;
+}
+
+a:focus {
+  outline: 0!important;
 }
 
 button {
@@ -15,6 +20,10 @@ button {
 .container {
   max-width: 1024px;
   margin: 0 auto;
+}
+
+main {
+  margin-bottom: 140px;
 }
 
 body {
@@ -53,21 +62,23 @@ body {
   background: #00ffa057;
   border: 2px solid #3fecac;
   margin: 5px;
-  font-size: 12px;
-  border-radius: 50px;
+  font-size: 13px;
+  border-radius: 4px 4px 4px 10px;
   text-align: center;
   cursor: pointer;
-  font-weight: bold;
   color: #ebfff8;
   transition: .3s;
-  height: 35px;
   display: flex;
   align-items: center;
 }
 
 .header__category a {
+  display: flex;
+  font-weight: normal;
+  align-items: center;
   color: #fff;
-  padding: 0 30px;
+  padding: 0 20px;
+  height: 35px;
 }
 
 .header__categories {
@@ -77,6 +88,10 @@ body {
 .header__category:hover {
   background-color: #8fffd500;
   border-color: #ffffff;
+}
+
+.header__category a:hover {
+  color: #ffffff;
 }
 
 .header__right {
@@ -148,6 +163,13 @@ body {
 .post-card__date {
   font-size: 12px;
   color: #7b7b7b;
+}
+
+.post-card__date a {
+  color: #ff5858;
+  padding: 5px;
+  text-decoration: underline;
+  font-weight: normal;
 }
 
 .post-card__description {
@@ -292,8 +314,17 @@ body {
 
 /* form */
 
+input:disabled,
+input[disabled],
+select:disabled,
+select[disabled] {
+  background-color: #ddd;
+  cursor: not-allowed!important;
+}
+
 .edit-card {
-  margin: 60px 0;
+  margin: 30px 0;
+  text-align: center;
 }
 
 .edit-card__wrapper {
@@ -356,6 +387,14 @@ button.edit-card__title {
   color: #939393;
   font-size: 16px;
   margin-bottom: 5px;
+  transition: 0.2s;
+  width: 300px;
+}
+
+button.edit-card__title:hover {
+  background-color: #00c295;
+  border: 2px solid #00c295;
+  color: #fff;
 }
 
 button.edit-card--send {
@@ -471,12 +510,9 @@ button.edit-card--send:disabled {
 }
 
 .post-comment__not {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 16px;
   color: #ff5858;
   text-align: center;
-  margin-bottom: 15px;
-  
 }
 
 .post-comment {
@@ -485,4 +521,22 @@ button.edit-card--send:disabled {
   width: 64%;
   margin: 0 auto;
   border-radius: 6px;
+}
+
+/* Footer */
+
+.footer {
+  background: #888;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.footer__block {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  color: #fff;
+  font-size: 12px;
 }

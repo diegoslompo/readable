@@ -1,4 +1,4 @@
-import {RECEIVE_COMMENTS, ADD_COMMENTS} from '../actions/comments'
+import {RECEIVE_COMMENTS, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../actions/comments'
 
 export default function comments (state={}, action) {
   const {comment} = action
@@ -20,12 +20,24 @@ export default function comments (state={}, action) {
         // }, {})
       }
       // return Object.assign({}, state, {[parentId]: comments})
-    case ADD_COMMENTS:
+    case ADD_COMMENT:
       return {
         ...state,
         [comment.id]: comment
       }
-
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        [comment.id]: {
+          ...state[comment.id],
+          body: comment.body
+        }
+      }
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        [comment.id]: comment
+      }
     default:
       return state 
   }

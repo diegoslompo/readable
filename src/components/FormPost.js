@@ -67,10 +67,8 @@ class FormPost extends Component {
   }
 
   render() {
-    const { categories, post} = this.props
+    const { categories, subimitText} = this.props
     const {body, title, category, author } = this.state
-
-    
 
     return (
       
@@ -89,16 +87,18 @@ class FormPost extends Component {
               className="edit-card__input"
               placeholder="Your Name"
               value={author}
+              disabled={this.props.edit ? "disabled" : ""}
               onChange={this.handleChangeAuthor}
             />
             <select
               className="edit-card__select"
               value={category}
               onChange={this.handleChangeCategory}
+              disabled={this.props.edit ? "disabled" : ""}
               >
               <option value="select">Select category</option>
               {categories && categories.map((category) => (
-                <option className="edit-card__option" key={category.path}>{category.name}</option>
+                <option className="edit-card__option" key={category.path} >{category.name}</option>
               ))}
             </select>
             <textarea
@@ -111,7 +111,7 @@ class FormPost extends Component {
               className="edit-card__button edit-card--send"
               disabled={body === ''}
               >
-              Submit
+              {subimitText}
             </button>
             <button
               type="text"

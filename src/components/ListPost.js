@@ -27,6 +27,11 @@ class ListPost extends Component {
 
     return (
       <section>
+        {NoDeleted.length > 0 && categoryPosts.length > 0 ? (
+          <div>teste dentro</div>
+        ):(
+          <div className="post-error__not">Not Found Posts</div>
+        )}
         <div className="post-card">
           <div className="container">
             <ul>

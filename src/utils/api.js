@@ -95,18 +95,25 @@ export const voteOnPost = (id, option) =>
       })
   }).then(res => res.json())
 
-export const addComment = (body, author, parentId) =>
+export const addComment = (newComment) =>
   fetch(`${api}/comments`, {
     method: 'POST',
-    headers: headers,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newComment)
     // body: JSON.stringify({ parentId, body, author, id: (parentId + '_' + utils.randomString(5)), timestamp:Date.now()})
   }).then(res => res.json())
 
 export const editComment = (commentId, body) =>
   fetch(`${api}/comments/${commentId}`, {
     method: 'PUT',
-    headers: headers,
-    body: JSON.stringify({timestamp:Date.now(), body})
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({body})
   }).then(res => res.json())
 
 export const deleteComment = (commentId) =>

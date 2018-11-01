@@ -1,44 +1,45 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatDate } from '../utils/helpers'
-
-
-import { handleDeletePost, handleVotePost } from '../actions/posts'
 import * as Icon from 'react-icons/md'
 import Modal from 'react-modal'
+import EditComment from './EditComment'
+import { handleDeleteComment} from '../actions/comments'
+
+
+// import { handleDeletePost, handleVotePost } from '../actions/posts'
 // import * as Icon from 'react-icons/md'
 // import { formatDate } from '../utils/helpers'
-// // import { handleDeletePost, handleVotePost } from '../actions/posts'
-// // import EditPost from './EditPost'
 // import { NavLink } from 'react-router-dom'
-// import Modal from 'react-modal'
+
 
 
 class Comment extends Component {
 
-  // state = {
-  //   id: '',
-  //   edit: false,
-  //   postModalOpen: false
-  // }
+  state = {
+    id: '',
+    edit: false,
+    commentModalOpen: false
+  }
 
   // handleVote = (option) => {
   //   const { dispatch, post } = this.props
   //   dispatch(handleVotePost(post.id, option))
   // };
 
-  // handleDelete = (e) => {
-  //   e.preventDefault()
-  //   const { dispatch, post } = this.props
-  //   dispatch(handleDeletePost(post.id))
-  // }
+  handleDelete = (e) => {
+    e.preventDefault()
 
-  // handleEdit = (e) => {
-  //   this.openPostModal()
-  // };
+    const { dispatch, comment } = this.props
+    dispatch(handleDeleteComment(comment.id))
+  }
 
-  // openPostModal = () => this.setState(() => ({ postModalOpen: true }))
-  // closePostModal = () => this.setState(() => ({ postModalOpen: false }))
+  handleEdit = () => {
+    this.openCommentModal()
+  };
+
+  openCommentModal = () => this.setState(() => ({ postModalOpen: true }))
+  closeCommentModal = () => this.setState(() => ({ postModalOpen: false }))
 
   render() {
     const {comment} = this.props
@@ -47,7 +48,7 @@ class Comment extends Component {
     // //   return <p></p>
     // // }
 
-    // const { postModalOpen } = this.state
+    const { postModalOpen } = this.state
 
     const { author,body,deleted,id,parentDeleted,parentId,timestamp,voteScore } = comment
 
@@ -56,7 +57,8 @@ class Comment extends Component {
         <div className="post-card__info">
           <div className="post-card__top">
             <div className="post-card__write">
-              <div className="post-card__date"> {formatDate(timestamp)}, by {author} </div>
+              <div className="post-card__date"><b> {author} </b> </div>
+              <div className="post-card__date"> {formatDate(timestamp)}</div>
             </div>
           </div>
           <div className="post-card__description">{body}</div>
@@ -71,6 +73,14 @@ class Comment extends Component {
           <div className={`post-card__score ${voteScore > 0 ? 'post-card__score--up': voteScore < 0 ? 'post-card__score--down': ''}`} >{voteScore}</div>
         </div>
 
+        <Modal
+          className='modal'
+          overlayClassName='overlay'
+          isOpen={postModalOpen}
+          contentLabel='Modal'>
+            <button className="edit-card edit-card__close" onClick={this.closeCommentModal}> <Icon.MdClose /> </button>
+            <EditComment comment={comment} onModalClose={this.closeCommentModal} />
+        </Modal>
       </div>
     )
   }

@@ -51,6 +51,7 @@ class FormComment extends Component {
 
   render() {
     const {body, author} = this.state
+    const {submitText} = this.props
 
     return (
       
@@ -62,6 +63,7 @@ class FormComment extends Component {
               className="edit-card__input"
               placeholder="Your Name"
               value={author}
+              disabled={this.props.edit ? "disabled" : ""}
               onChange={this.handleChangeAuthor}
             />
             <textarea
@@ -74,7 +76,7 @@ class FormComment extends Component {
               className="edit-card__button edit-card--send"
               disabled={body === '' && author === '' ? 'disable' : ''}
               >
-              Submit
+              {submitText}
             </button>
             <button
               type="text"
