@@ -4,7 +4,7 @@ import { formatDate } from '../utils/helpers'
 import * as Icon from 'react-icons/md'
 import Modal from 'react-modal'
 import EditComment from './EditComment'
-import { handleDeleteComment} from '../actions/comments'
+import { handleDeleteComment, handleVoteComment} from '../actions/comments'
 
 
 // import { handleDeletePost, handleVotePost } from '../actions/posts'
@@ -22,10 +22,10 @@ class Comment extends Component {
     commentModalOpen: false
   }
 
-  // handleVote = (option) => {
-  //   const { dispatch, post } = this.props
-  //   dispatch(handleVotePost(post.id, option))
-  // };
+  handleVote = (option) => {
+    const { dispatch, comment } = this.props
+    dispatch(handleVoteComment(comment.id, option))
+  }
 
   handleDelete = (e) => {
     e.preventDefault()

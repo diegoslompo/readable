@@ -4,29 +4,115 @@ import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import NewPost from './NewPost'
 import * as Icon from 'react-icons/md'
+import { sortPost } from '../actions/posts';
+// import { handleAddPost } from '../actions/posts'
+import { sortBy } from '../utils/helpers'
 
 
 class ListPost extends Component {
 
   state = {
-    postModalOpen: false
+    postModalOpen: false,
+    sortNew: {}
   }
 
   openPostModal = () => this.setState(() => ({ postModalOpen: true }))
   closePostModal = () => this.setState(() => ({ postModalOpen: false }))
 
+
+  handleSort = (event, sort) => {
+    let selectValue = event.target.value
+    const { dispatch} = this.props
+    const sortValue = { sort: selectValue }
+    
+    dispatch(sortPost(sortValue))
+    // debugger
+
+
+    this.setState(() => ({ sortNew: selectValue }))
+  }
+  
   render() {
-
-    const { postModalOpen } = this.state
-    const { postIds} = this.props
+    
+    const { postModalOpen, sortNew } = this.state
+    const { postIds, post, posts, sortBy} = this.props
     const { category } = this.props.match.params
-
-    const NoDeleted = postIds.filter(post => post.deleted !== true);
+    
+    const NoDeleted = postIds.filter(post => post.deleted !== true)
     const categoryPosts = postIds.filter(post => post.category === category && post.deleted !== true)
+    
+    
+  
+    const sortResult = sortBy.map(s => s.sort)
 
+    console.log(sortResult[0])
+
+  
+    const filteredPosts = postIds.filter(post => !post.deleted && (!category || (category && post.category === category)));
+
+    if (sortNew.length) {
+
+      filteredPosts.sort(function(a, b) {
+
+
+        let sortOrder = 1;
+        let key = ''
+
+        if (sortResult[0] === '-') {
+          const sortOrder = -1;
+          key = sortResult.substr(1);
+        }
+        
+        debugger
+        return sortOrder * (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0)
+        
+        // if (sortResult[0] === 'timestamp') {
+        //   return (a > b)
+        //     ? -1
+        //     : 1
+        // } else if (sortResult[0] === '-timestamp') {
+        //   return (a > b)
+        //     ? 1
+        //     : -1
+        // } else if (sortResult[0] === 'voteScore') {
+        //   return (a > b)
+        //     ? 1
+        //     : -1
+        // } else if (sortResult[0] === '-voteScore') {
+        //   return (a > b)
+        //     ? -1
+        //     : 1
+        // }
+        //  else {
+        //   return (a.voteScore > b.voteScore)
+        //     ? -1
+        //     : 1
+        // }
+      })
+    }
+
+    // let sortOrder = 1;
+    // if (key[0] === '-') {
+    //   sortOrder = -1;
+    //   key = key.substr(1);
+    // }
+  
+    // return function(a, b) {
+    //   return sortOrder * (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0);
+    // }
 
     return (
       <section>
+
+        <select type="select" name="sort" onChange={this.handleSort}>
+          <option value="">Sort By</option>
+          <option value="voteScore">Score: Low to high</option>
+          <option value="-voteScore">Score: High to high</option>
+          <option value="-timestamp">Date: New to Old</option>
+          <option value="timestamp">Date: Old to New</option>
+        </select>
+
+
         {NoDeleted.length > 0 && categoryPosts.length > 0 ? (
           <div>teste dentro</div>
         ):(
@@ -35,9 +121,7 @@ class ListPost extends Component {
         <div className="post-card">
           <div className="container">
             <ul>
-              {!category
-                ? NoDeleted.map(post => (<li key={post.id} ><Post id={post.id}/></li>))
-                : categoryPosts.map(post => (<li key={post.id} ><Post id={post.id}/></li>))
+              {filteredPosts.map(post => (<li key={post.id} ><Post id={post.id}/></li>))
               }
             </ul>
           </div>
@@ -65,15 +149,19 @@ class ListPost extends Component {
 
 
 
-function mapStateToProps ({ posts, categories}, {match}) {
+function mapStateToProps ({ post, posts, categories, sortPostsBy, sortBy}, {match}) {
 
   console.log(match)
   // debugger
-
+  
+  const sortNew = sortBy
+  
   return {
     categories: Object.values(categories),
     posts: posts,
-    postIds: Object.values(posts)
+    postIds: Object.values(posts),
+    sortPostsBy,
+    sortBy: Object.values(sortNew)
       // .sort((a,b) => posts[b].timestamp - posts[a].timestamp)
   }
 }

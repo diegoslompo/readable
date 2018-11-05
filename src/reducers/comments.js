@@ -1,4 +1,4 @@
-import {RECEIVE_COMMENTS, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../actions/comments'
+import {RECEIVE_COMMENTS, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT, VOTE_COMMENT} from '../actions/comments'
 
 export default function comments (state={}, action) {
   const {comment} = action
@@ -38,6 +38,16 @@ export default function comments (state={}, action) {
         ...state,
         [comment.id]: comment
       }
+      
+    case VOTE_COMMENT:
+      return {
+        ...state,
+        [comment.id]: {
+          ...state[comment.id],
+          voteScore: comment.voteScore
+        }
+      }
+
     default:
       return state 
   }

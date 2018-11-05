@@ -122,9 +122,14 @@ export const deleteComment = (commentId) =>
     headers: headers
   }).then(res => res.json())
 
-export const voteOnComment = (commentId, thumbsUp) =>
-  fetch(`${api}/comments/${commentId}`, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({ option: thumbsUp? 'upVote' : 'downVote'})
+export const voteOnComment = (id, option) =>
+  fetch(`${api}/comments/${id}`, {
+      method: 'POST',
+      headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          option
+      })
   }).then(res => res.json())

@@ -46,6 +46,13 @@ export default function posts (state={}, action) {
           voteScore: post.voteScore
         }
       }
+
+    // case SORT_POST:
+    //   debugger
+    //   return {
+    //     ...state,
+    //     sortBy: action.sort
+    // }
   
     default:
       return state 
