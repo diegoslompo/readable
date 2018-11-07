@@ -6,6 +6,7 @@ import Post from './Post'
 import Comment from './Comment';
 import NewComment from './NewComment';
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 class DetailPost extends Component {
 
@@ -25,21 +26,28 @@ class DetailPost extends Component {
       const { commentModalOpen } = this.state
       // debugger
     
-      const NoDeleted = commentsIds.filter(comment => comment.deleted !== true);
+      const NoDeletedComment = commentsIds.filter(comment => comment.deleted !== true)
+      const NoDeletedPost = postsIds.filter(post => post.deleted !== true)
         
         return (
             <section>
-              <div className="post-card">
+              <div className="post-card__comment">
                 <div className="container">
-                  {postsIds.map(post => (
+                  {NoDeletedPost.length > 0 ?
+                    NoDeletedPost.map(post => (
                       <div key={post.id} ><Post id={post.id}/></div>
-                  ))}
-                  <div className="">
+                  )):
+                  this.props.history.push('/')
+                  }
+                  <div>
                     <div className="post-comment">
+                      <div className="post-comment__home">
+                        <NavLink to={`/`}>← back to home</NavLink>
+                      </div>
                       <div>
                         <div className="post-comment__title">Comments Post</div>
-                        {NoDeleted.length > 0 ?
-                          NoDeleted.map(comment => (
+                        {NoDeletedComment.length > 0 ?
+                          NoDeletedComment.map(comment => (
                           <div key={comment.id}>
                             <Comment id={comment.id}/>
                           </div>
@@ -64,9 +72,6 @@ class DetailPost extends Component {
                         <button className="edit-card edit-card__close" onClick={this.closeCommentModal}> <Icon.MdClose /> </button>
                         <NewComment onModalClose={this.closeCommentModal} parentId={postParam} />
                     </Modal>
-                    <div className="">
-                      {/* <CommentForm parentId={this.props.match.params.postId} /> */}
-                    </div>
                   </div>
                 </div>
               </div>

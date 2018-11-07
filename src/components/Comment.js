@@ -44,13 +44,9 @@ class Comment extends Component {
   render() {
     const {comment} = this.props
 
-    // // if (post === null) {
-    // //   return <p></p>
-    // // }
-
     const { postModalOpen } = this.state
 
-    const { author,body,deleted,id,parentDeleted,parentId,timestamp,voteScore } = comment
+    const { author,body,timestamp,voteScore } = comment
 
     return (
       <div className="post-card__item">

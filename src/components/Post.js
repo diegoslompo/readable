@@ -68,10 +68,10 @@ class Post extends Component {
         <div className="post-card__utils">
         <div className="post-card__util-item" onClick={this.handleEdit}><Icon.MdEdit /></div>
         <div className="post-card__util-item" onClick={this.handleDelete} ><Icon.MdDeleteSweep /></div>
-        <div className="post-card__util-item">
+        <NavLink className="post-card__util-item" to={`/category/${category}/${id}`}>
           <Icon.MdModeComment />
-          <div className="post-card__util-comments">({commentCount})</div>
-        </div>
+          <div className="post-card__util-comments">({commentCount})</div> 
+        </NavLink>
         </div>
         <div className="post-card__actions">
           <button className="post-card__actions-item post-card--upvote" onClick={() => this.handleVote('upVote')}> <Icon.MdThumbUp /></button>

@@ -5,8 +5,7 @@ import Modal from 'react-modal'
 import NewPost from './NewPost'
 import * as Icon from 'react-icons/md'
 import { sortPost } from '../actions/posts';
-// import { handleAddPost } from '../actions/posts'
-import { sortBy } from '../utils/helpers'
+import { NavLink } from 'react-router-dom'
 
 
 class ListPost extends Component {
@@ -35,7 +34,7 @@ class ListPost extends Component {
   render() {
     
     const { postModalOpen, sortNew } = this.state
-    const { postIds, post, posts, sortBy} = this.props
+    const { postIds, categories, sortBy} = this.props
     const { category } = this.props.match.params
     
     const NoDeleted = postIds.filter(post => post.deleted !== true)
@@ -44,86 +43,62 @@ class ListPost extends Component {
     
   
     const sortResult = sortBy.map(s => s.sort)
-
-    console.log(sortResult[0])
-
+    const sortVal = sortResult[0]
   
     const filteredPosts = postIds.filter(post => !post.deleted && (!category || (category && post.category === category)));
 
     if (sortNew.length) {
-
       filteredPosts.sort(function(a, b) {
 
-
-        let sortOrder = 1;
-        let key = ''
-
-        if (sortResult[0] === '-') {
-          const sortOrder = -1;
-          key = sortResult.substr(1);
+        switch(sortVal) {
+          case 'timestamp':
+           return a.timestamp < b.timestamp ? -1 : 1
+          case '-timestamp':
+           return a.timestamp > b.timestamp ? -1 : 1
+          case 'voteScore':
+           return a.voteScore < b.voteScore ? -1 : 1
+          case '-voteScore':
+           return a.voteScore > b.voteScore ? -1 : 1
         }
-        
-        debugger
-        return sortOrder * (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0)
-        
-        // if (sortResult[0] === 'timestamp') {
-        //   return (a > b)
-        //     ? -1
-        //     : 1
-        // } else if (sortResult[0] === '-timestamp') {
-        //   return (a > b)
-        //     ? 1
-        //     : -1
-        // } else if (sortResult[0] === 'voteScore') {
-        //   return (a > b)
-        //     ? 1
-        //     : -1
-        // } else if (sortResult[0] === '-voteScore') {
-        //   return (a > b)
-        //     ? -1
-        //     : 1
-        // }
-        //  else {
-        //   return (a.voteScore > b.voteScore)
-        //     ? -1
-        //     : 1
-        // }
       })
     }
 
-    // let sortOrder = 1;
-    // if (key[0] === '-') {
-    //   sortOrder = -1;
-    //   key = key.substr(1);
-    // }
-  
-    // return function(a, b) {
-    //   return sortOrder * (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0);
-    // }
-
     return (
       <section>
+        <div className="container">
+          <div className="header__right">
+            <ul className="header__categories">
+              {categories.map((item) => (
+                <li className="header__category" key={item.name} >
+                  <NavLink to={`/category/${item.path}`}>{item.name}</NavLink>
+                </li>
+              ))}
+              <li className="header__category">
+                <NavLink to="/"><b>Show All</b></NavLink>
+              </li>
+            </ul>
+            <select className="header__filter" onChange={this.handleSort}>
+              <option value="">Sort By</option>
+              <option value="voteScore">Score: Low to high</option>
+              <option value="-voteScore">Score: High to high</option>
+              <option value="-timestamp">Date: New to Old</option>
+              <option value="timestamp">Date: Old to New</option>
+            </select>
+          </div>     
+        </div>
 
-        <select type="select" name="sort" onChange={this.handleSort}>
-          <option value="">Sort By</option>
-          <option value="voteScore">Score: Low to high</option>
-          <option value="-voteScore">Score: High to high</option>
-          <option value="-timestamp">Date: New to Old</option>
-          <option value="timestamp">Date: Old to New</option>
-        </select>
-
-
-        {NoDeleted.length > 0 && categoryPosts.length > 0 ? (
-          <div>teste dentro</div>
-        ):(
-          <div className="post-error__not">Not Found Posts</div>
-        )}
         <div className="post-card">
           <div className="container">
-            <ul>
-              {filteredPosts.map(post => (<li key={post.id} ><Post id={post.id}/></li>))
-              }
-            </ul>
+            {
+              filteredPosts.length > 0 ? 
+                filteredPosts.map(post => (<div key={post.id} ><Post id={post.id}/></div>))
+                :(
+                  <div>
+                    <div className="post-comment__not-post">Sorry 0 Posts :/ </div>
+                  </div>
+                )
+            }
+
           </div>
         </div>
         <div className="container"> 

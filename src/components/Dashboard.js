@@ -10,8 +10,6 @@ class Dashboard extends Component {
 
   render() {
 
-    const {categories} = this.props
-
     return (
 
       <Router>
@@ -20,31 +18,13 @@ class Dashboard extends Component {
           <header className="header">
             <div className="container">
               <div className="row">
-                <div className="col-xs-4">
+                <div className="col-xs-12">
                   <NavLink to='/'>
                     <div className="header__logo">
                       <Icon.MdFilterDrama />
                       <div className="header--title">ReadAble</div>
                     </div>
                   </NavLink>
-                </div>
-                <div className="col-xs-8 header__right">
-                  <ul className="header__categories">
-                    {categories.map((item) => (
-                      <li className="header__category" key={item.name} >
-                        <NavLink to={`/category/${item.path}`}>{item.name}</NavLink>
-                      </li>
-                    ))}
-                    <li className="header__category">
-                      <NavLink to="/"><b>Show All</b></NavLink>
-                    </li>
-                  </ul>
-                  <select className="header__filter">
-                    <option>Dec Date</option>
-                    <option>Asc Date</option>
-                    <option>More Score</option>
-                    <option>Minor Score</option>
-                  </select>
                 </div>
               </div>
             </div>

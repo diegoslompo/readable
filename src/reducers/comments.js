@@ -13,13 +13,7 @@ export default function comments (state={}, action) {
 
       return {
         ...apiComments
-        // ...state,
-        // [comment.id]: comments.reduce((accu, curr) => {
-        //   accu[curr.id] = curr;
-        //   return accu;
-        // }, {})
       }
-      // return Object.assign({}, state, {[parentId]: comments})
     case ADD_COMMENT:
       return {
         ...state,
