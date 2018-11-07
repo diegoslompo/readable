@@ -1,8 +1,9 @@
 import {RECEIVE_POSTS, ADD_POST, DELETE_POST, EDIT_POST, VOTE_POST} from '../actions/posts'
+import {ADD_COMMENT, DELETE_COMMENT} from '../actions/comments'
 
 export default function posts (state={}, action) {
 
-  const { post, posts} = action
+  const { post, comment} = action
 
   const arrayToObject = (arr, keyField) =>
   Object.assign({}, ...arr.map(item => ({[item[keyField]]: item})))
@@ -12,7 +13,6 @@ export default function posts (state={}, action) {
       const apiPosts = arrayToObject(action.posts, 'id')
 
       return {
-        // retorna porção do state vazio de inicio, recria
         ...apiPosts
 
       }
@@ -47,12 +47,32 @@ export default function posts (state={}, action) {
         }
       }
 
-    // case SORT_POST:
-    //   debugger
-    //   return {
-    //     ...state,
-    //     sortBy: action.sort
-    // }
+    case ADD_COMMENT:
+      return {
+        ...state,
+        [comment.parentId]: {
+          ...state[comment.parentId],
+          commentCount: state[comment.parentId].commentCount + 1
+        }
+      }
+
+    case ADD_COMMENT:
+      return {
+        ...state,
+        [comment.parentId]: {
+          ...state[comment.parentId],
+          commentCount: state[comment.parentId].commentCount + 1
+        }
+      }
+
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        [comment.parentId]: {
+          ...state[comment.parentId],
+          commentCount: state[comment.parentId].commentCount - 1
+        }
+      }
   
     default:
       return state 

@@ -5,6 +5,7 @@ import {receiveComments} from '../actions/comments'
 import Post from './Post'
 import Comment from './Comment';
 import NewComment from './NewComment';
+import NotFound from './NotFound';
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -31,50 +32,53 @@ class DetailPost extends Component {
         
         return (
             <section>
-              <div className="post-card__comment">
-                <div className="container">
-                  {NoDeletedPost.length > 0 ?
-                    NoDeletedPost.map(post => (
-                      <div key={post.id} ><Post id={post.id}/></div>
-                  )):
-                  this.props.history.push('/')
-                  }
-                  <div>
-                    <div className="post-comment">
-                      <div className="post-comment__home">
-                        <NavLink to={`/`}>← back to home</NavLink>
+              {postsIds.length > 0 ? (
+                <div className="post-card__comment">
+                  <div className="container">
+                    {NoDeletedPost.length > 0 ?
+                      NoDeletedPost.map(post => (
+                        <div key={post.id} ><Post id={post.id}/></div>
+                    )):
+                    this.props.history.push('/')
+                    }
+                    <div>
+                      <div className="post-comment">
+                        <div className="post-comment__home">
+                          <NavLink to={`/`}>← back to home</NavLink>
+                        </div>
+                        <div>
+                          <div className="post-comment__title">Comments Post</div>
+                          {NoDeletedComment.length > 0 ?
+                            NoDeletedComment.map(comment => (
+                            <div key={comment.id}>
+                              <Comment id={comment.id}/>
+                            </div>
+                          )): (
+                            <div>
+                              <div className="post-comment__not">Sorry 0 Comments :/</div>
+                            </div>
+                          )}
+                        </div>
+                        <div className="edit-card">
+                          <button
+                            className="edit-card__title"
+                            onClick={this.openCommentModal}
+                            > New Comment</button>
+                        </div>
                       </div>
-                      <div>
-                        <div className="post-comment__title">Comments Post</div>
-                        {NoDeletedComment.length > 0 ?
-                          NoDeletedComment.map(comment => (
-                          <div key={comment.id}>
-                            <Comment id={comment.id}/>
-                          </div>
-                        )): (
-                          <div>
-                            <div className="post-comment__not">Sorry 0 Comments :/</div>
-                          </div>
-                        )}
-                      </div>
-                      <div className="edit-card">
-                        <button
-                          className="edit-card__title"
-                          onClick={this.openCommentModal}
-                          > New Comment</button>
-                      </div>
+                      <Modal
+                        className='modal'
+                        overlayClassName='overlay'
+                        isOpen={commentModalOpen}
+                        contentLabel='Modal'>
+                          <button className="edit-card edit-card__close" onClick={this.closeCommentModal}> <Icon.MdClose /> </button>
+                          <NewComment onModalClose={this.closeCommentModal} parentId={postParam} />
+                      </Modal>
                     </div>
-                    <Modal
-                      className='modal'
-                      overlayClassName='overlay'
-                      isOpen={commentModalOpen}
-                      contentLabel='Modal'>
-                        <button className="edit-card edit-card__close" onClick={this.closeCommentModal}> <Icon.MdClose /> </button>
-                        <NewComment onModalClose={this.closeCommentModal} parentId={postParam} />
-                    </Modal>
                   </div>
                 </div>
-              </div>
+              ):(<NotFound/>)}
+              
             </section>
     
         )
