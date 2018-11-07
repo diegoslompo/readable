@@ -77,7 +77,9 @@ class DetailPost extends Component {
                     </div>
                   </div>
                 </div>
-              ):(<NotFound/>)}
+              ):(
+                <NotFound/>
+              )}
               
             </section>
     
