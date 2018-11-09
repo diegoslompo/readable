@@ -1,5 +1,3 @@
-console.log("esta no console")
-
 const logger = (store) => (next) => (action) => {
     console.group(action.type)
       console.log('The action: ', action)

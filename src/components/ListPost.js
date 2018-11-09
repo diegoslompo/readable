@@ -29,6 +29,10 @@ class ListPost extends Component {
 
     this.setState(() => ({ sortNew: selectValue }))
   }
+
+  componentWillMount() {
+    Modal.setAppElement('body');
+  }
   
   render() {
     
@@ -45,7 +49,6 @@ class ListPost extends Component {
 
     if (sortNew.length) {
       filteredPosts.sort(function(a, b) {
-
         switch(sortVal) {
           case 'timestamp':
            return a.timestamp < b.timestamp ? -1 : 1
@@ -55,6 +58,8 @@ class ListPost extends Component {
            return a.voteScore < b.voteScore ? -1 : 1
           case '-voteScore':
            return a.voteScore > b.voteScore ? -1 : 1
+          default:
+          return a.voteScore > b.voteScore ? -1 : 1 
         }
       })
     }

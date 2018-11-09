@@ -56,15 +56,6 @@ export default function posts (state={}, action) {
         }
       }
 
-    case ADD_COMMENT:
-      return {
-        ...state,
-        [comment.parentId]: {
-          ...state[comment.parentId],
-          commentCount: state[comment.parentId].commentCount + 1
-        }
-      }
-
     case DELETE_COMMENT:
       return {
         ...state,
