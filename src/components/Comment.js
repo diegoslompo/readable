@@ -6,19 +6,9 @@ import Modal from 'react-modal'
 import EditComment from './EditComment'
 import { handleDeleteComment, handleVoteComment} from '../actions/comments'
 
-
-// import { handleDeletePost, handleVotePost } from '../actions/posts'
-// import * as Icon from 'react-icons/md'
-// import { formatDate } from '../utils/helpers'
-// import { NavLink } from 'react-router-dom'
-
-
-
 class Comment extends Component {
 
   state = {
-    id: '',
-    edit: false,
     commentModalOpen: false
   }
 

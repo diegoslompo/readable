@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Modal from 'react-modal'
 
 class FormPost extends Component {
   state = {
@@ -10,7 +9,6 @@ class FormPost extends Component {
     body: '',
     id: ''
   }
-
 
   componentDidMount() {
     if (this.props.post) {
@@ -23,39 +21,19 @@ class FormPost extends Component {
       });
     }
   }
-  
 
-  handleChangeTitle = (e) => {
-    const title = e.target.value
-    this.setState(() => ({
-      title
-    }))
-  }
-
-  handleChangeAuthor = (e) => {
-    const author = e.target.value
-    this.setState(() => ({
-      author
-    }))
-  }
-  handleChangeBody = (e) => {
-    const body = e.target.value
-    this.setState(() => ({
-      body
-    }))
-  }
-  handleChangeCategory = (e) => {
-    const category = e.target.value
-    this.setState(() => ({
-      category
-    }))
+  handleChange = (e) => {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value
+    })
   }
 
   onForm = (e) => {
     e.preventDefault()
 
     const { body, title, category, author } = this.state
-    const { onSubmit, onModal } = this.props
+    const { onSubmit } = this.props
 
     onSubmit(body, title, category, author)
 
@@ -70,6 +48,8 @@ class FormPost extends Component {
     const { categories, subimitText} = this.props
     const {body, title, category, author } = this.state
 
+    const validate = (category !== '' && title !== '' && body !== '' && author !== '')
+
     return (
       
       <div className="edit-card">
@@ -80,23 +60,26 @@ class FormPost extends Component {
               className="edit-card__input"
               placeholder="Title"
               value={title}
-							onChange={this.handleChangeTitle}
+              name='title'
+							onChange={this.handleChange}
             />
             <input
               type="text"
               className="edit-card__input"
               placeholder="Your Name"
               value={author}
+              name='author'
               disabled={this.props.edit ? "disabled" : ""}
-              onChange={this.handleChangeAuthor}
+              onChange={this.handleChange}
             />
             <select
               className="edit-card__select"
               value={category}
-              onChange={this.handleChangeCategory}
+              name='category'
+              onChange={this.handleChange}
               disabled={this.props.edit ? "disabled" : ""}
               >
-              <option value="select">Select category</option>
+              <option value="">Select category</option>
               {categories && categories.map((category) => (
                 <option className="edit-card__option" key={category.path} >{category.name}</option>
               ))}
@@ -104,12 +87,13 @@ class FormPost extends Component {
             <textarea
               className="edit-card__textarea"
               value={body}
-              onChange={this.handleChangeBody}
+              name='body'
+              onChange={this.handleChange}
             > </textarea>
             <button
               type="submit"
               className="edit-card__button edit-card--send"
-              disabled={body === ''}
+              disabled={!validate ? 'disabled' : ''}
               >
               {subimitText}
             </button>

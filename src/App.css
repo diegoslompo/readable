@@ -28,7 +28,7 @@ main {
 
 body {
   background-color: #f1f1f1;
-  overflow: visible;
+  overflow-y: scroll;
 }
 
 .header {
@@ -587,11 +587,12 @@ button.edit-card--send:disabled {
 .post-404 {
   text-align: center;
   padding: 70px 0;
-  border-radius: 1000px;
-  border: 5px solid #ccc;
-  width: 400px;
+  border-radius: 15px;
+  /* border: 1px solid #e6e6e6; */
+  width: 460px;
   height: 60px;
-  margin: 100px auto;
+  margin: -15px auto;
+  background: #fff;
 }
 
 .post-404__title {

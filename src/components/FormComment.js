@@ -8,8 +8,6 @@ class FormComment extends Component {
     id: ''
   }
 
-  // author,body,deleted,id,parentDeleted,parentId,timestamp,voteScore
-
   componentDidMount() {
     if (this.props.comment) {
       const { author, body } = this.props.comment;
@@ -21,17 +19,11 @@ class FormComment extends Component {
   }
   
 
-  handleChangeAuthor = (e) => {
-    const author = e.target.value
-    this.setState(() => ({
-      author
-    }))
-  }
-  handleChangeBody = (e) => {
-    const body = e.target.value
-    this.setState(() => ({
-      body
-    }))
+  handleChange = (e) => {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value
+    })
   }
 
   onForm = (e) => {
@@ -53,6 +45,8 @@ class FormComment extends Component {
     const {body, author} = this.state
     const {submitText} = this.props
 
+    const validate = (body !== '' && author !== '')
+
     return (
       
       <div className="edit-card">
@@ -63,18 +57,20 @@ class FormComment extends Component {
               className="edit-card__input"
               placeholder="Your Name"
               value={author}
+              name="author"
               disabled={this.props.edit ? "disabled" : ""}
-              onChange={this.handleChangeAuthor}
+              onChange={this.handleChange}
             />
             <textarea
               className="edit-card__textarea"
               value={body}
-              onChange={this.handleChangeBody}
+              name="body"
+              onChange={this.handleChange}
             > </textarea>
             <button
               type="submit"
               className="edit-card__button edit-card--send"
-              disabled={body === '' && author === '' ? 'disable' : ''}
+              disabled={!validate ? 'disabled' : ''}
               >
               {submitText}
             </button>
@@ -90,11 +86,5 @@ class FormComment extends Component {
     )
   }
 }
-
-// function mapStateToProps ({categories}) {
-//   return {
-//     categories: Object.values(categories)
-//   }
-// }
 
 export default connect()(FormComment)

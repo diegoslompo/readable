@@ -24,9 +24,6 @@ function newPost (post) {
 
 export function handleAddPost (post) {
   return (dispatch) => {
-
-    // dispatch(showLoading())
-
     return addPost({
       body: post.body, 
       title: post.title,
@@ -36,7 +33,6 @@ export function handleAddPost (post) {
       timestamp: post.timestamp
     })
       .then((post) => dispatch(newPost(post)))
-      // .then(() => dispatch(hideLoading()))
   }
 }
 

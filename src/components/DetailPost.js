@@ -25,7 +25,6 @@ class DetailPost extends Component {
     render() {
       const { commentsIds, postsIds, postParam} = this.props
       const { commentModalOpen } = this.state
-      // debugger
     
       const NoDeletedComment = commentsIds.filter(comment => comment.deleted !== true)
       const NoDeletedPost = postsIds.filter(post => post.deleted !== true)
@@ -94,14 +93,11 @@ function mapStateToProps ({posts,comments}, {match}) {
     const postParam = match.params.postId
 
     const post = postList.filter((post) => post.id === postParam)
-    // debugger
 
     return {
-        // categories: Object.values(categories),
         commentsIds: Object.values(comments),
         postsIds: post,
         postParam
-        // comments: comments[match.params.postId]
 
     }
 }

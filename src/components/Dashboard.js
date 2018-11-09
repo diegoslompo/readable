@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ListPost from './ListPost'
 import DetailPost from './DetailPost'
 import NotFound from './NotFound';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import * as Icon from 'react-icons/md'
 
@@ -13,8 +13,8 @@ class Dashboard extends Component {
 
     return (
 
-      <Router>
-        <Fragment>
+      <Router >
+        <div>
           <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet"></link>
           <header className="header">
             <div className="container">
@@ -32,10 +32,10 @@ class Dashboard extends Component {
           </header>
           <main>
             <Switch>
-              <Route exact path='/'  render={(props) => (<ListPost {...props}/>)}/>
-              <Route path="/category/:category/:postId" component={DetailPost} />
-              <Route path='/category/:category' render={(props) => (<ListPost {...props}/>)} />
-              <Route component={NotFound} />
+              <Route exact path='/'  component={ListPost}/>
+              <Route exact path="/:category/:postId" component={DetailPost} />
+              <Route exact path='/:category' component={ListPost} />
+              <Route path="*" component={NotFound} />
             </Switch>
           </main>
           <footer className="footer">
@@ -46,7 +46,7 @@ class Dashboard extends Component {
               </div>        
             </div>
           </footer>
-        </Fragment>
+        </div>
       </Router>
 
     )
@@ -62,7 +62,6 @@ function mapStateToProps ({ posts, categories}, {match}) {
     categories: Object.values(categories),
     posts: posts,
     postIds: Object.values(posts)
-      // .sort((a,b) => posts[b].timestamp - posts[a].timestamp)
   }
 }
 

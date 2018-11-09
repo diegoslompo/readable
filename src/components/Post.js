@@ -11,15 +11,13 @@ import Modal from 'react-modal'
 class Post extends Component {
 
   state = {
-    id: '',
-    edit: false,
     postModalOpen: false
   }
 
   handleVote = (option) => {
     const { dispatch, post } = this.props
     dispatch(handleVotePost(post.id, option))
-  };
+  }
 
   handleDelete = (e) => {
     e.preventDefault()
@@ -27,9 +25,9 @@ class Post extends Component {
     dispatch(handleDeletePost(post.id))
   }
 
-  handleEdit = (e) => {
+  handleEdit = () => {
     this.openPostModal()
-  };
+  }
 
   openPostModal = () => this.setState(() => ({ postModalOpen: true }))
   closePostModal = () => this.setState(() => ({ postModalOpen: false }))
@@ -37,14 +35,10 @@ class Post extends Component {
   render() {
     const { post} = this.props
 
-    // if (post === null) {
-    //   return <p></p>
-    // }
-
     const { postModalOpen } = this.state
 
     const {
-      id, title, body, timestamp, author, category, voteScore, deleted, commentCount
+      id, title, body, timestamp, author, category, voteScore, commentCount
     } = post
 
     return (
@@ -53,12 +47,12 @@ class Post extends Component {
           <div className="post-card__top">
             <div className="post-card__avatar"><Icon.MdLocalLibrary /></div>
             <div className="post-card__write">
-              <NavLink to={`/category/${category}/${id}`}>
+              <NavLink to={`/${category}/${id}`}>
                 <div className="post-card__title"> {title} </div>
               </NavLink>
               <div className="post-card__date"> {formatDate(timestamp)}, by {author} in 
                 <b>
-                  <NavLink to={`/category/${category}`}>{category}</NavLink>
+                  <NavLink to={`/${category}`}>{category}</NavLink>
                 </b>
               </div>
             </div>
@@ -68,7 +62,7 @@ class Post extends Component {
         <div className="post-card__utils">
         <div className="post-card__util-item" onClick={this.handleEdit}><Icon.MdEdit /></div>
         <div className="post-card__util-item" onClick={this.handleDelete} ><Icon.MdDeleteSweep /></div>
-        <NavLink className="post-card__util-item" to={`/category/${category}/${id}`}>
+        <NavLink className="post-card__util-item" to={`/${category}/${id}`}>
           <Icon.MdModeComment />
           <div className="post-card__util-comments">({commentCount})</div> 
         </NavLink>
@@ -95,15 +89,11 @@ class Post extends Component {
 function mapStateToProps ({posts}, { id }) {
   
   const post = posts[id]
-  // const parentPost = post ? posts[post.replyingTo] : null
 
   return {
     post: post
-      // ? parentPost
-      // : null
   }
 }
 
-// export default Post
 
 export default connect(mapStateToProps)(Post)

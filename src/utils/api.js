@@ -48,20 +48,9 @@ export const addPost = (newPost) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    // body: JSON.stringify({ title, body, author, category, id})
     body: JSON.stringify(newPost)
   })
   .then(data => data.json())
-
-
-// export const editPost = (postId, body, title) =>
-//   fetch(`${api}/posts/${postId}`, {
-//     method: 'PUT',
-//     headers: headers,
-//     body: JSON.stringify({body, title})
-//   }).then(res => res.json())
-
-
 
  export const editPost = (postId, post) =>
   fetch(`${api}/posts/${postId}`, {
@@ -103,7 +92,6 @@ export const addComment = (newComment) =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(newComment)
-    // body: JSON.stringify({ parentId, body, author, id: (parentId + '_' + utils.randomString(5)), timestamp:Date.now()})
   }).then(res => res.json())
 
 export const editComment = (commentId, body) =>

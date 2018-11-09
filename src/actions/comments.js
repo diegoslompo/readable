@@ -28,8 +28,6 @@ function newComment (comment) {
 
 export function handleAddComment (comment) {
   return (dispatch) => {
-
-    // dispatch(showLoading())
     return addComment({
       body: comment.body, 
       author: comment.author,
@@ -38,7 +36,6 @@ export function handleAddComment (comment) {
       parentId: comment.parentId
     })
       .then((comment) => dispatch(newComment(comment)))
-      // .then(() => dispatch(hideLoading()))
   }
 }
 

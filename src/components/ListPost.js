@@ -20,14 +20,12 @@ class ListPost extends Component {
   closePostModal = () => this.setState(() => ({ postModalOpen: false }))
 
 
-  handleSort = (event, sort) => {
+  handleSort = (event) => {
     let selectValue = event.target.value
     const { dispatch} = this.props
     const sortValue = { sort: selectValue }
     
     dispatch(sortPost(sortValue))
-    // debugger
-
 
     this.setState(() => ({ sortNew: selectValue }))
   }
@@ -37,11 +35,8 @@ class ListPost extends Component {
     const { postModalOpen, sortNew } = this.state
     const { postIds, categories, sortBy} = this.props
     const { category } = this.props.match.params
-    
-    // const NoDeleted = postIds.filter(post => post.deleted !== true)
 
     const categoryPosts = categories.filter(c => c.name === category)
-    debugger
 
     const sortResult = sortBy.map(s => s.sort)
     const sortVal = sortResult[0]
@@ -66,14 +61,14 @@ class ListPost extends Component {
 
     return (
       <section>
-        {categoryPosts ? (
+        {categoryPosts.length > 0 || !category ? (
           <div>
             <div className="container">
               <div className="header__right">
                 <ul className="header__categories">
                   {categories.map((item) => (
                     <li className="header__category" key={item.name} >
-                      <NavLink to={`/category/${item.path}`}>{item.name}</NavLink>
+                      <NavLink to={`${item.path}`}>{item.name}</NavLink>
                     </li>
                   ))}
                   <li className="header__category">
@@ -131,10 +126,9 @@ class ListPost extends Component {
 
 
 
-function mapStateToProps ({ post, posts, categories, sortPostsBy, sortBy}, {match}) {
+function mapStateToProps ({ posts, categories, sortBy}, {match}) {
 
   console.log(match)
-  // debugger
   
   const sortNew = sortBy
   
@@ -142,9 +136,7 @@ function mapStateToProps ({ post, posts, categories, sortPostsBy, sortBy}, {matc
     categories: Object.values(categories),
     posts: posts,
     postIds: Object.values(posts),
-    sortPostsBy,
     sortBy: Object.values(sortNew)
-      // .sort((a,b) => posts[b].timestamp - posts[a].timestamp)
   }
 }
 
